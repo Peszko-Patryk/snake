@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+
+\usepackage{polski}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyvrb}
+\usepackage{enumerate}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{strona \thepage \hspace{1pt} z \pageref{LastPage}}
+
+\fancyheadoffset{0cm}
+\rhead{P. Peszko}
+\rfoot{Strona \thepage \hspace{1pt} z \pageref{LastPage}}
+\title{Gra "Snake" sterowana sztuczną siecią neuronową. Specyfikacja Funkcjonalna}
+\author{Patryk Peszko}
+\date{10 marca 2021}
+
+
+\begin{document}
+	\begin{titlepage}
+		\clearpage\maketitle\thispagestyle{empty}
+		\maketitle
+	\end{titlepage}
+
+
+\tableofcontents
+\newpage
+	\section {Cel projektu}
+
+		Celem projektu jest napisanie gry "Snake" z graficznym interfejsem użytkownika (GUI), oraz zaimplementowanie sztucznej sieci neuronowej, która będzie sterować tą grą. Użytkownik będzie mógł podać plik z zapisanymi współczynnikami sieci neuronowej jako argument wywołania programu. Jeżeli użytkownik nie poda takiego pliku to sieć przyjmie losowe wartości współczynników. Po uruchomieniu programu zobaczymy GUI zawierające planszę gry oraz następujące informacje:
+		\begin{itemize}
+			\item punkty w aktualnej rozgrywce
+			\item ilość pozostałych ruchów węża
+			\item najwyższy wynik punktów w aktualnej sesji programu
+			\item numer generacji wężów
+			\item ilość węży w następnej generacji, które nie ukończyły jeszcze gry
+			\item prędkość węża
+		\end{itemize}
+		W każdej generacji będzie 10 węży. Gdy wszystkie skończą grę program znajdzie najlepszego spośród nich i powiadomi użytkownika, że może kliknąć spacje by rozpocząć wyświetlanie przebiegu jego rozgrywki. W tym czasie program stworzy nową generację węży (na podstawie współczynników sieci neuronowej najlepszego węża z poprzedniej rozgrywki) i rozpocznie gry w poszukiwaniu nowego najlepszego węża. Program będzie działał aż użytkownik nie przyciśnie enter. Wtedy zniknie GUI a program zapisze współczynniki najlepszego węża ostatniej generacji do pliku podanego przez użytkownika jako argument wywołania programu. Jeżeli użytkownik nie poda takiego pliku, program zapisze informacje do pliku "wspolczynniki\_najlepszego\_weza.txt" w lokalizacji źródeł programu.
+		
+		 
+	\section {Pliki}
+	
+		Program będzie wczytywał plik .txt zawierający współczynniki (liczby zmiennoprzecinkowe z zakresu <-10,10>) rozdzielone spacją. Współczynniki będą zapisywane do pliku wyjściowego w tej samej kolejności co pobierane z pliku wejściowego.
+		\subsection{Zawartość przykładowego pliku wejściowego}
+			\begin{verbatim}
+			0.32 -0.1 -3.23 -0.54 0.99 0.02. 0.41 -0.99 1.1 3.23 0.32 -0.1 
+			-3.23 -0.54 0.99 0.02. 0.41 -0.99 1.1 3.23 0.99 0.02. 0.41
+			\end{verbatim}
+			
+		\subsection{Zawartość przykładowego pliku wyjściowego}
+			\begin{verbatim}
+			0.32 -0.1 -3.23 -0.54 0.99 0.02. 0.41 -0.99 1.1 3.23 0.32 -0.1 
+			-3.23 -0.54 0.99 0.02. 0.41 -0.99 1.1 3.23 0.99 0.02. 0.41
+			\end{verbatim}
+	
+	\section {Dane wejściowe}
+		Program będzie przyjmować następujące flagi: 
+		\begin{itemize}
+			\item "-R" - plik o rozszerzeniu .txt zawierający informacje zapisane w powyższym punkcie (patrz "Plik wejściowy")
+			\item "-W" - plik o rozszerzeniu .txt do którego zostanie zapisany wynik końcowy (program usunie wcześniejszą zawartość pliku)
+			\item "-H" - pomoc, program napisze jakie są dostępne flagi oraz z ilu neuronów składa się sieć (informacja ta jest podana, żeby użytkownik wiedział ile współczynników powinien zawierać plik wejściowy)
+		\end{itemize}
+		Wszystkie flagi są nieobowiązkowe.
+		
+	\section{Scenariusz uruchomienia}
+		Przykładowe wiersze uruchomienia programu:
+		\begin{verbatim}
+		java snake -R input.txt -W output.txt
+		java snake -R input.txt 
+		java snake
+		\end{verbatim}
+		
+	\section{Opis sytuacji wyjątkowych}
+		Program będzie można uruchomić bez podawania pliku do zapisu. W takim przypadku wynik zostanie zapisany do pliku "wspolczynniki\_najlepszego\_weza.txt". Jeżeli plik podany przez użytkownika nie będzie istniał, albo jego zawartość będzie niepoprawna (za mało/dużo współczynników, liczby spoza zakresu, inne znaki) to program powiadomi użytkownika w której linijce znajduje się błąd i co to za błąd. Następnie program zakończy swoje działanie.	
+	\section{Testowanie}
+		Każda klasa, zawierająca metody potencjalnie błędne, będzie zawierała własną klasę testująca.
+\end{document}          
