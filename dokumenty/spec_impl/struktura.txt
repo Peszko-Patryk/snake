@@ -1,0 +1,39 @@
+Snake
+    ├── specyfikacje
+    │   ├── funkcjonalna
+    │   │   └── specyfikacja_funkcjonalna.tex
+    │   └── implementacyjna
+    │       ├── siec.png
+    │       ├── struktura.txt
+    │       └── specyfikacja_implementacyjna.tex
+    └── src
+        ├── main
+        │   └── java
+        │       ├── Neuron.java
+        │       ├── Layer.java
+        │       ├── NeuronNetwork.java
+        │       ├── ListsHolder.java 
+        │       ├── SnakeRunByNeuronNetwork.java
+        │       ├── ReadFromFile.java
+        │       ├── WriteToFile.java
+        │       ├── Cell.java
+        │       ├── GameField.java
+        │       ├── Apple.java
+        │       ├── Graphics.java
+        │       ├── KeyOperations.java
+        │       ├── Snake.java
+        │       └── Game.java
+        ├── resources  
+        │       ├── apple.png
+        │       ├── input.txt
+        │       └── output.txt
+	└── test
+	    └── java
+                ├── SnakeRunByNeuronNetworkTest.java
+                ├── NeuronTest.java
+                ├── NeuronNetworkTest.java
+                ├── CellTest.java
+                ├── GameFieldTest.java
+                ├── ReadFromFileTest.java
+                ├── SnakeTest.java
+                └── GameTest.java
