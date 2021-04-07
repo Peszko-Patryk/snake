@@ -9,7 +9,6 @@ public class Game implements ListsHolder {
         snake.setBody();
     }
 
-
     public void paint(Graphics g, ImageObserver o){
         if (state) {
             snake.move();

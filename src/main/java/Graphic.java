@@ -7,7 +7,8 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
     private int numGen = 0;
     private int highestScore = 0;
     private int points = 0;
-    private Timer timer = new Timer(200,this);
+    public int speed = 10;
+    private Timer timer = new Timer(20*speed,this);
     Image snakeImage = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\snake.png");
 
 
@@ -16,6 +17,7 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
     }
 
     public void paint(Graphics g){
+        timer.setDelay(20*speed);
         g.fillRect(1,1,582,659);
         g.drawImage(snakeImage,0, 0, 584, 661, this);
         g.setColor(Color.WHITE);
@@ -34,8 +36,8 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
         g.drawString("Pozostało: " + numGen + " węży w następnej generacji.", 10, 60);
         g.drawString("Najwyższy wynik: " + highestScore, 10, 100);
         g.drawString("Punkty: " + snake.getScore(), 400, 20);
-        g.drawString("Pozostało: 100" + points + " ruchów", 400, 60);
-        g.drawString("Prędkość węża: " + points, 400, 100);
+        g.drawString("Pozostało: " + snake.getMovesLeft() + " ruchów", 400, 60);
+        g.drawString("Prędkość węża: " + (10 - (speed - 10)), 400, 100);
     }
 
     @Override

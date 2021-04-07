@@ -30,11 +30,18 @@ public class KeyOperations implements ListsHolder, KeyListener {
             if (game.isState()){
                 snake.turnRight();
             }
+        } else if (keyCode == KeyEvent.VK_UP){
+            if (graphic.speed > 5){
+                graphic.speed -= 1;
+            }
+        } else if (keyCode == KeyEvent.VK_DOWN){
+            if (graphic.speed < 20 ){
+                graphic.speed += 1;
+            }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
     }
 }
