@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 public class Graphic extends JPanel implements ListsHolder, ActionListener {
     private int numGen = 0;
     private int highestScore = 0;
-    private int points = 0;
     public int speed = 10;
     private Timer timer = new Timer(20 * speed, this);
     Image snakeImage = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\snake.png");

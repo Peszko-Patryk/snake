@@ -8,6 +8,8 @@ public class Snake implements ListsHolder {
     private int score = 0;
     private int movesLeft = 25;
     private int getMoves = 25;
+    private int headPosX = 5;
+    private int headPosY = 5;
 
     public ArrayList<Cell> body = new ArrayList();
 
@@ -15,7 +17,9 @@ public class Snake implements ListsHolder {
         if (checkIfHitWall() || checkIfAteTail()) {
             game.endGame();
         } else {
-            body.add(cells[body.get(body.size() - 1).getY() + yDir][body.get(body.size() - 1).getX() + xDir]);
+            headPosX = body.get(body.size() - 1).getX() + xDir;
+            headPosY = body.get(body.size() - 1).getY() + yDir;
+            body.add(cells[headPosY][headPosX]);
             cells[body.get(body.size() - 1).getY()][body.get(body.size() - 1).getX()].setSnakeOn(true);
             body.get(0).setSnakeOn(false);
             body.remove(0);
@@ -116,5 +120,13 @@ public class Snake implements ListsHolder {
 
     public int getyDir() {
         return yDir;
+    }
+
+    public int getHeadPosX() {
+        return headPosX;
+    }
+
+    public int getHeadPosY() {
+        return headPosY;
     }
 }
