@@ -26,8 +26,8 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
             g.drawLine(92 + i*500/sizeOfField, 127, 92 + i*500/sizeOfField, 627);
             g.drawLine(42, 177 + i*500/sizeOfField, 542, 177 + i*500/sizeOfField);
         }
-        paintStrings(g);
         game.paint(g,this);
+        paintStrings(g);
     }
 
     private void paintStrings(Graphics g){
@@ -38,6 +38,13 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
         g.drawString("Punkty: " + snake.getScore(), 400, 20);
         g.drawString("Pozostało: " + snake.getMovesLeft() + " ruchów", 400, 60);
         g.drawString("Prędkość węża: " + (10 - (speed - 10)), 400, 100);
+
+        if (!game.isState()){
+            g.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+            g.setColor(Color.RED);
+            g.drawString("Naciśnij ENTER aby rozpocząć grę", 70, 200);
+            g.drawString("UP/DOWN zmienia prędkość węża", 70, 250);
+        }
     }
 
     @Override

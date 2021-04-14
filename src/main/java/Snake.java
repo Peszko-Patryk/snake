@@ -7,6 +7,7 @@ public class Snake implements ListsHolder {
     private int yDir = -1;
     private int score = 0;
     private int movesLeft = 25;
+    private int getMoves = 25;
 
     public ArrayList<Cell> body = new ArrayList();
 
@@ -92,7 +93,7 @@ public class Snake implements ListsHolder {
 
     public void setScore() {
         score++;
-        movesLeft += 20;
+        movesLeft += getMoves;
         length++;
         body.add(apple.getCell());
     }

@@ -8,7 +8,7 @@ public class SnakeRunByNeuronNetwork {
         frame.addKeyListener(new KeyOperations(graphic));
         frame.setSize(600,700);
         frame.setLocationRelativeTo(null);
-        frame.setTitle("Gra w Czolgi");
+        frame.setTitle("Snake Run By Neuron Network");
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
