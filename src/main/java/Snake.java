@@ -11,8 +11,8 @@ public class Snake implements ListsHolder {
 
     public ArrayList<Cell> body = new ArrayList();
 
-    public void move(){
-        if (checkIfHitWall() || checkIfAteTail()){
+    public void move() {
+        if (checkIfHitWall() || checkIfAteTail()) {
             game.endGame();
         } else {
             body.add(cells[body.get(body.size() - 1).getY() + yDir][body.get(body.size() - 1).getX() + xDir]);
@@ -29,64 +29,64 @@ public class Snake implements ListsHolder {
 
     private boolean checkIfAteTail() {
         Cell cell;
-        for (int i = 0; i < length - 3; i++){
+        for (int i = 0; i < length - 3; i++) {
             cell = body.get(i);
-            if ((body.get(length - 1).getY() + yDir) == cell.getY() && (body.get(length - 1).getX() + xDir) == cell.getX()){
+            if ((body.get(length - 1).getY() + yDir) == cell.getY() && (body.get(length - 1).getX() + xDir) == cell.getX()) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkIfHitWall(){
-        if (body.get(body.size() - 1).getY() + yDir < 0 || body.get(body.size() - 1).getY() + yDir > 9 || body.get(body.size() - 1).getX() + xDir < 0 || body.get(body.size() - 1).getX() + xDir > 9){
+    public boolean checkIfHitWall() {
+        if (body.get(body.size() - 1).getY() + yDir < 0 || body.get(body.size() - 1).getY() + yDir > 9 || body.get(body.size() - 1).getX() + xDir < 0 || body.get(body.size() - 1).getX() + xDir > 9) {
             return true;
         }
         return false;
     }
 
-    public void turnLeft(){
-        if (yDir == -1){
+    public void turnLeft() {
+        if (yDir == -1) {
             yDir = 0;
             xDir = -1;
-        } else if (yDir == 1){
+        } else if (yDir == 1) {
             yDir = 0;
             xDir = 1;
-        } else if (xDir == -1){
+        } else if (xDir == -1) {
             yDir = 1;
             xDir = 0;
-        } else if (xDir == 1){
+        } else if (xDir == 1) {
             yDir = -1;
             xDir = 0;
         }
     }
 
-    public void turnRight(){
-        if (yDir == -1){
+    public void turnRight() {
+        if (yDir == -1) {
             yDir = 0;
             xDir = 1;
-        } else if (yDir == 1){
+        } else if (yDir == 1) {
             yDir = 0;
             xDir = -1;
-        } else if (xDir == -1){
+        } else if (xDir == -1) {
             yDir = -1;
             xDir = 0;
-        } else if (xDir == 1){
+        } else if (xDir == 1) {
             yDir = 1;
             xDir = 0;
         }
     }
 
-    public void setBody(){
-        body.add(cells[5][5]);
-        cells[5][5].setSnakeOn(true);
+    public void setBody() {
         body.add(cells[6][5]);
         cells[6][5].setSnakeOn(true);
+        body.add(cells[5][5]);
+        cells[5][5].setSnakeOn(true);
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         g.setColor(Color.BLACK);
-        for (int i = 0; i < body.size(); i++){
+        for (int i = 0; i < body.size(); i++) {
             body.get(i).paint(g);
         }
     }
@@ -102,7 +102,19 @@ public class Snake implements ListsHolder {
         return movesLeft;
     }
 
-    public int getScore(){
+    public int getScore() {
         return score;
+    }
+
+    public int getxDir() {
+        return xDir;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getyDir() {
+        return yDir;
     }
 }

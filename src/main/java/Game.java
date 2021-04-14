@@ -5,16 +5,16 @@ public class Game implements ListsHolder {
 
     private boolean state = false;
 
-    public Game(){
+    public Game() {
         snake.setBody();
     }
 
-    public void paint(Graphics g, ImageObserver o){
+    public void paint(Graphics g, ImageObserver o) {
         if (state) {
             snake.move();
         }
         snake.paint(g);
-        if(checkIfSnakeAteApple()){
+        if (checkIfSnakeAteApple()) {
             relocateApple();
         }
         apple.paint(g, o);
@@ -25,8 +25,8 @@ public class Game implements ListsHolder {
     }
 
     private boolean checkIfSnakeAteApple() {
-        if (snake.body.get(snake.body.size() - 1).getX() == apple.getCell().getX()){
-            if (snake.body.get(snake.body.size() - 1).getY() == apple.getCell().getY()){
+        if (snake.body.get(snake.body.size() - 1).getX() == apple.getCell().getX()) {
+            if (snake.body.get(snake.body.size() - 1).getY() == apple.getCell().getY()) {
                 snake.setScore();
                 return true;
             }
@@ -34,7 +34,7 @@ public class Game implements ListsHolder {
         return false;
     }
 
-    public void endGame(){
+    public void endGame() {
         setState(false);
     }
 
@@ -42,7 +42,7 @@ public class Game implements ListsHolder {
         return state;
     }
 
-    public void setState(boolean state){
+    public void setState(boolean state) {
         this.state = state;
     }
 }

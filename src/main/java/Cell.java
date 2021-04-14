@@ -9,7 +9,7 @@ public class Cell {
     private final int stopY;
     private boolean snakeOn = false;
 
-    public Cell(int x, int y,int startX, int startY, int stopX, int stopY) {
+    public Cell(int x, int y, int startX, int startY, int stopX, int stopY) {
         this.x = x;
         this.y = y;
         this.startX = startX;
@@ -50,7 +50,7 @@ public class Cell {
         return stopY;
     }
 
-    public void paint(Graphics g) throws NullPointerException{
-        g.fillRect(startX, startY, stopX-startX,stopY-startY);
+    public void paint(Graphics g) throws NullPointerException {
+        g.fillRect(startX, startY, stopX - startX, stopY - startY);
     }
 }

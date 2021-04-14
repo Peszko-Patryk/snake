@@ -8,29 +8,29 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
     private int highestScore = 0;
     private int points = 0;
     public int speed = 10;
-    private Timer timer = new Timer(20*speed,this);
+    private Timer timer = new Timer(20 * speed, this);
     Image snakeImage = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\snake.png");
 
 
-    public Graphic(){
+    public Graphic() {
         timer.start();
     }
 
-    public void paint(Graphics g){
-        timer.setDelay(20*speed);
-        g.fillRect(1,1,582,659);
-        g.drawImage(snakeImage,0, 0, 584, 661, this);
+    public void paint(Graphics g) {
+        timer.setDelay(20 * speed);
+        g.fillRect(1, 1, 582, 659);
+        g.drawImage(snakeImage, 0, 0, 584, 661, this);
         g.setColor(Color.WHITE);
         g.drawRect(42, 127, 500, 500);
-        for (int i = 0; i < 10; i++){
-            g.drawLine(92 + i*500/sizeOfField, 127, 92 + i*500/sizeOfField, 627);
-            g.drawLine(42, 177 + i*500/sizeOfField, 542, 177 + i*500/sizeOfField);
+        for (int i = 0; i < 10; i++) {
+            g.drawLine(92 + i * 500 / sizeOfField, 127, 92 + i * 500 / sizeOfField, 627);
+            g.drawLine(42, 177 + i * 500 / sizeOfField, 542, 177 + i * 500 / sizeOfField);
         }
-        game.paint(g,this);
+        game.paint(g, this);
         paintStrings(g);
     }
 
-    private void paintStrings(Graphics g){
+    private void paintStrings(Graphics g) {
         g.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         g.drawString("Generacja: " + numGen, 10, 20);
         g.drawString("Pozostało: " + numGen + " węży w następnej generacji.", 10, 60);
@@ -39,7 +39,7 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
         g.drawString("Pozostało: " + snake.getMovesLeft() + " ruchów", 400, 60);
         g.drawString("Prędkość węża: " + (10 - (speed - 10)), 400, 100);
 
-        if (!game.isState()){
+        if (!game.isState()) {
             g.setFont(new Font(Font.SERIF, Font.BOLD, 30));
             g.setColor(Color.RED);
             g.drawString("Naciśnij ENTER aby rozpocząć grę", 70, 200);
