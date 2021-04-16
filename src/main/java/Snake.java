@@ -15,7 +15,7 @@ public class Snake implements ListsHolder {
     private Cell[][] cells;
 
     public ArrayList<Cell> body = new ArrayList();
-    private NeuronNetwork neuronNetwork ;
+    private NeuronNetwork neuronNetwork;
 
     public Snake(Cell[][] cells) {
         this.cells = cells;
@@ -40,11 +40,11 @@ public class Snake implements ListsHolder {
         }
     }
 
-    public void decide(){
+    public void decide() {
         int result = neuronNetwork.decide();
-        if (result == -1 ){
+        if (result == -1) {
             turnLeft();
-        } else if (result == 1){
+        } else if (result == 1) {
             turnRight();
         }
         move();
@@ -136,7 +136,7 @@ public class Snake implements ListsHolder {
         score++;
         movesLeft += getMoves;
         length++;
-        body.add(body.get(body.size()-1));
+        body.add(body.get(body.size() - 1));
     }
 
     public boolean isState() {

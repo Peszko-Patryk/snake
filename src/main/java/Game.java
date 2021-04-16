@@ -68,7 +68,7 @@ public class Game implements ListsHolder {
     private void setCells() {
         for (int i = 0; i < sizeOfField; i++) {
             for (int j = 0; j < sizeOfField; j++) {
-                cells[i][j] = new Cell(j, i, 43 + j * 500 / sizeOfField, 128 + i * 500 / sizeOfField, (43 + 500/sizeOfField - 1) + j * 500 / sizeOfField, (128 + 500 / sizeOfField -1) + i * 500 / sizeOfField);
+                cells[i][j] = new Cell(j, i, 43 + j * 500 / sizeOfField, 128 + i * 500 / sizeOfField, (43 + 500 / sizeOfField - 1) + j * 500 / sizeOfField, (128 + 500 / sizeOfField - 1) + i * 500 / sizeOfField);
             }
         }
     }

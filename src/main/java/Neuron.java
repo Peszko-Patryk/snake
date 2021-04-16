@@ -10,7 +10,7 @@ public class Neuron {
 
 
     public Neuron() {
-        factor = random.nextFloat();
+        factor = random.nextFloat()*2;
         constant = random.nextFloat();
     }
 

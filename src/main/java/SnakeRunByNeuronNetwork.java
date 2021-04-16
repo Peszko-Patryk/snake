@@ -2,8 +2,8 @@ import javax.swing.*;
 
 public class SnakeRunByNeuronNetwork {
     public static void main(String[] args) {
-        Thread handlingGenerations = new Thread(){
-            public void run(){
+        Thread handlingGenerations = new Thread() {
+            public void run() {
                 try {
                     GenerationsGenerator gg = new GenerationsGenerator();
                 } catch (InterruptedException e) {

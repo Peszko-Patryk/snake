@@ -25,12 +25,12 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
             g.drawLine(42 + i * 500 / sizeOfField, 127, 42 + i * 500 / sizeOfField, 627);
             g.drawLine(42, 127 + i * 500 / sizeOfField, 542, 127 + i * 500 / sizeOfField);
         }
-        if (bestGames.size() > 0 && watch){
+        if (bestGames.size() > 0 && watch) {
             if (bestGames.get(0).getSnake().isState()) {
                 bestGames.get(0).paint(g, null);
             } else {
 //                watch = false;
-                if (bestGames.get(0).getSnake().getScore() > highestScore){
+                if (bestGames.get(0).getSnake().getScore() > highestScore) {
                     highestScore = bestGames.get(0).getSnake().getScore();
                 }
                 bestGames.remove(0);

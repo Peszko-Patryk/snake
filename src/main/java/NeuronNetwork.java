@@ -31,7 +31,7 @@ public class NeuronNetwork implements ListsHolder {
     }
 
     private int changeSnakesDirection() {
-        float j = layers.get(layers.size()-1).neurons.get(0).getOutput();
+        float j = layers.get(layers.size() - 1).neurons.get(0).getOutput();
         int k = 1;
         for (int i = 0; i < layers.get(layers.size() - 1).neurons.size(); i++) {
             if (layers.get(layers.size() - 1).neurons.get(i).getOutput() >= j) {
@@ -124,7 +124,7 @@ public class NeuronNetwork implements ListsHolder {
         layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(-xdir, -ydir));
     }
 
-    private void putDataIntoNetwork(int xdir, int ydir){
+    private void putDataIntoNetwork(int xdir, int ydir) {
         layers.get(0).neurons.get(input++).proccess(checkHowFarToWall(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToApple(xdir, ydir));
@@ -188,10 +188,10 @@ public class NeuronNetwork implements ListsHolder {
     }
 
     public void changeSlightlyFactors() {
-        for (Layer layer : layers){
-            for (Neuron neuron : layer.neurons){
-                neuron.setConstant((float) (neuron.getConstant() * ( 0.9 + rand.nextFloat()/5)));
-                neuron.setFactor((float) (neuron.getFactor() * ( 0.9 + rand.nextFloat()/5)));
+        for (Layer layer : layers) {
+            for (Neuron neuron : layer.neurons) {
+                neuron.setConstant((float) (neuron.getConstant() * (0.9 + rand.nextFloat() / 5)));
+                neuron.setFactor((float) (neuron.getFactor() * (0.9 + rand.nextFloat() / 5)));
             }
         }
     }

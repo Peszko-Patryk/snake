@@ -20,7 +20,7 @@ public class KeyOperations implements ListsHolder, KeyListener {
             if (!graphic.isWatch() && bestGames.size() > 0) {
                 graphic.setWatch(true);
             }
-        }else if (keyCode == KeyEvent.VK_UP) {
+        } else if (keyCode == KeyEvent.VK_UP) {
             if (graphic.speed > 5) {
                 graphic.speed -= 1;
             }
