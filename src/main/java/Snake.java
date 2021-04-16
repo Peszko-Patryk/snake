@@ -9,8 +9,8 @@ public class Snake implements ListsHolder {
     private int movesLeft = 25;
     private int movesDone = 0;
     private int getMoves = 25;
-    private int headPosX = 3;
-    private int headPosY = 2;
+    private int headPosX = 5;
+    private int headPosY = 5;
     private boolean state = true;
     private Cell[][] cells;
 
@@ -102,14 +102,10 @@ public class Snake implements ListsHolder {
     }
 
     public void setBody() {
-//        body.add(cells[6][5]);
-//        cells[6][5].setSnakeOn(true);
-//        body.add(cells[5][5]);
-//        cells[5][5].setSnakeOn(true);
-        body.add(cells[3][3]);
-        cells[3][3].setSnakeOn(true);
-        body.add(cells[2][3]);
-        cells[2][3].setSnakeOn(true);
+        body.add(cells[6][5]);
+        cells[6][5].setSnakeOn(true);
+        body.add(cells[5][5]);
+        cells[5][5].setSnakeOn(true);
     }
 
     public void paint(Graphics g) {

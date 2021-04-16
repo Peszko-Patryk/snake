@@ -52,7 +52,7 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
         if (!watch && bestGames.size() > 0) {
             g.setFont(new Font(Font.SERIF, Font.BOLD, 30));
             g.setColor(Color.RED);
-            g.drawString("Naciśnij ENTER aby rozpocząć oglądanei", 70, 200);
+            g.drawString("Naciśnij ENTER aby rozpocząć oglądanie", 20, 200);
             g.drawString("UP/DOWN zmienia prędkość węża", 70, 250);
         }
     }
