@@ -2,14 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="979ee54c-a34e-4cde-aaa7-d53fd704e6fd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Layer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Neuron.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/NeuronNetwork.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/NeuronNetworkTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GenerationsGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokumenty/spec_impl/Specyfikacja_implementacyjna.tex" beforeDir="false" afterPath="$PROJECT_DIR$/dokumenty/spec_impl/Specyfikacja_implementacyjna.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokumenty/spec_impl/struktura.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dokumenty/spec_impl/struktura.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Apple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Apple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameField.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Graphic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Graphic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KeyOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KeyOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ListsHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ListsHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Neuron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Neuron.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/NeuronNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NeuronNetwork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Snake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SnakeRunByNeuronNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SnakeRunByNeuronNetwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GameFieldTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GenerationsGeneratorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/NeuronNetworkTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/NeuronNetworkTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/SnakeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SnakeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameField.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Graphic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Graphic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/KeyOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/KeyOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ListsHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ListsHolder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NeuronNetwork.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NeuronNetwork.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Snake.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Snake.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SnakeRunByNeuronNetwork.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SnakeRunByNeuronNetwork.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/GameFieldTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/NeuronNetworkTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/NeuronNetworkTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/SnakeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/SnakeTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +67,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../2 sem/GraWStatki" />
@@ -64,7 +85,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.NeuronNetworkTest.decide">
+  <component name="RunManager" selected="Application.Snake">
     <configuration name="Snake" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="SnakeRunByNeuronNetwork" />
       <module name="snake" />
@@ -151,14 +172,16 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="28" y="350" width="1736" height="866" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618417436404" />
-    <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser" timestamp="1618424020144">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state x="765" y="-845" key="#com.intellij.ide.util.MemberChooser" timestamp="1618578654594">
+      <screen x="0" y="-1080" width="1920" height="1050" />
     </state>
     <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618424020144" />
+    <state x="765" y="-845" key="#com.intellij.ide.util.MemberChooser/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618578654594" />
     <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616944435511" />
-    <state x="704" y="77" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1616931226492">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state x="704" y="-1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1618570712213">
+      <screen x="0" y="-1080" width="1920" height="1050" />
     </state>
+    <state x="704" y="-1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618570712213" />
     <state x="704" y="77" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616931226492" />
     <state x="707" y="414" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1616943579895">
       <screen x="0" y="30" width="1920" height="1050" />
@@ -172,28 +195,32 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="842" y="449" width="260" height="211" key="Github.ShareDialog/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616013138492" />
-    <state width="1877" height="94" key="GridCell.Tab.0.bottom" timestamp="1618426170264">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state width="1877" height="179" key="GridCell.Tab.0.bottom" timestamp="1618583299396">
+      <screen x="0" y="-1080" width="1920" height="1050" />
     </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.bottom/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426170264" />
+    <state width="1877" height="80" key="GridCell.Tab.0.bottom/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426408844" />
+    <state width="1877" height="179" key="GridCell.Tab.0.bottom/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618583299396" />
     <state width="1493" height="36" key="GridCell.Tab.0.bottom/0.30.1536.834@0.30.1536.834" timestamp="1617985794794" />
     <state width="1877" height="181" key="GridCell.Tab.0.bottom/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616946787905" />
-    <state width="1877" height="94" key="GridCell.Tab.0.center" timestamp="1618426170263">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state width="1877" height="179" key="GridCell.Tab.0.center" timestamp="1618583299396">
+      <screen x="0" y="-1080" width="1920" height="1050" />
     </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.center/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426170263" />
+    <state width="1877" height="80" key="GridCell.Tab.0.center/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426408844" />
+    <state width="1877" height="179" key="GridCell.Tab.0.center/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618583299396" />
     <state width="1493" height="36" key="GridCell.Tab.0.center/0.30.1536.834@0.30.1536.834" timestamp="1617985794794" />
     <state width="1877" height="181" key="GridCell.Tab.0.center/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616946787905" />
-    <state width="1877" height="94" key="GridCell.Tab.0.left" timestamp="1618426170262">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state width="1877" height="179" key="GridCell.Tab.0.left" timestamp="1618583299396">
+      <screen x="0" y="-1080" width="1920" height="1050" />
     </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.left/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426170262" />
+    <state width="1877" height="80" key="GridCell.Tab.0.left/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426408844" />
+    <state width="1877" height="179" key="GridCell.Tab.0.left/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618583299396" />
     <state width="1493" height="36" key="GridCell.Tab.0.left/0.30.1536.834@0.30.1536.834" timestamp="1617985794794" />
     <state width="1877" height="181" key="GridCell.Tab.0.left/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616946787905" />
-    <state width="1877" height="94" key="GridCell.Tab.0.right" timestamp="1618426170263">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state width="1877" height="179" key="GridCell.Tab.0.right" timestamp="1618583299396">
+      <screen x="0" y="-1080" width="1920" height="1050" />
     </state>
-    <state width="1877" height="94" key="GridCell.Tab.0.right/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426170263" />
+    <state width="1877" height="80" key="GridCell.Tab.0.right/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426408844" />
+    <state width="1877" height="179" key="GridCell.Tab.0.right/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618583299396" />
     <state width="1493" height="36" key="GridCell.Tab.0.right/0.30.1536.834@0.30.1536.834" timestamp="1617985794794" />
     <state width="1877" height="181" key="GridCell.Tab.0.right/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616946787905" />
     <state width="1877" height="352" key="GridCell.Tab.1.bottom" timestamp="1616930156800">
@@ -231,10 +258,19 @@
     </state>
     <state x="-1827" y="720" width="1350" height="648" maximized="true" key="dock-window-1/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618416230385" />
     <state x="2270" y="800" width="555" height="796" maximized="true" key="dock-window-1/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1617279302329" />
-    <state x="702" y="175" key="refactoring.ChangeSignatureDialog" timestamp="1616943483583">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state x="702" y="-935" key="refactoring.ChangeSignatureDialog" timestamp="1618572272963">
+      <screen x="0" y="-1080" width="1920" height="1050" />
     </state>
+    <state x="702" y="-935" key="refactoring.ChangeSignatureDialog/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618572272963" />
     <state x="702" y="175" key="refactoring.ChangeSignatureDialog/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616943483583" />
+    <state x="616" y="-297" key="run.anything.popup" timestamp="1618564517555">
+      <screen x="0" y="-1080" width="1920" height="1050" />
+    </state>
+    <state x="616" y="-297" key="run.anything.popup/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618564517555" />
+    <state x="623" y="-853" width="672" height="678" key="search.everywhere.popup" timestamp="1618568237436">
+      <screen x="0" y="-1080" width="1920" height="1050" />
+    </state>
+    <state x="623" y="-853" width="672" height="678" key="search.everywhere.popup/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1618568237436" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

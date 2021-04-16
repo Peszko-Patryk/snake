@@ -17,7 +17,7 @@ Snake
         │       ├── ReadFromFile.java
         │       ├── WriteToFile.java
         │       ├── Cell.java
-        │       ├── GameField.java
+        │       ├── GenerationsGenerator.java
         │       ├── Apple.java
         │       ├── Graphics.java
         │       ├── KeyOperations.java
@@ -33,7 +33,7 @@ Snake
                 ├── NeuronTest.java
                 ├── NeuronNetworkTest.java
                 ├── CellTest.java
-                ├── GameFieldTest.java
+                ├── GenerationsGeneratorTest.java
                 ├── ReadFromFileTest.java
                 ├── SnakeTest.java
                 └── GameTest.java

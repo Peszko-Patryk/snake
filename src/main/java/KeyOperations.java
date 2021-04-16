@@ -17,20 +17,10 @@ public class KeyOperations implements ListsHolder, KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_ENTER) {
-            if (!game.isState()) {
-                game.setState(true);
-            } else {
-                game.setState(false);
+            if (!graphic.isWatch() && bestGames.size() > 0) {
+                graphic.setWatch(true);
             }
-        } else if (keyCode == KeyEvent.VK_A) {
-            if (game.isState()) {
-                snake.turnLeft();
-            }
-        } else if (keyCode == KeyEvent.VK_S) {
-            if (game.isState()) {
-                snake.turnRight();
-            }
-        } else if (keyCode == KeyEvent.VK_UP) {
+        }else if (keyCode == KeyEvent.VK_UP) {
             if (graphic.speed > 5) {
                 graphic.speed -= 1;
             }

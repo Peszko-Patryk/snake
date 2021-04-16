@@ -10,8 +10,8 @@ public class Neuron {
 
 
     public Neuron() {
-        factor = random.nextFloat() / 100;
-        constant = random.nextFloat() / 100;
+        factor = random.nextFloat();
+        constant = random.nextFloat();
     }
 
     public void proccess(int input) {
