@@ -23,7 +23,7 @@ public class Neuron {
                 data += delivers.get(i).getOutput();
             }
         }
-        output = constant + factor * data;
+        output = factor * data;
         ReLuFunction();
     }
 

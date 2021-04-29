@@ -1,5 +1,4 @@
 public class GenerationsGenerator implements ListsHolder {
-    private int snakesInGeneration = 10;
     private Game[] games = new Game[snakesInGeneration];
     private int[] scores = new int[snakesInGeneration];
 

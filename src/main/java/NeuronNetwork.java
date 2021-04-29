@@ -19,6 +19,14 @@ public class NeuronNetwork implements ListsHolder {
         layers.add(new Layer(sizes[0]));
         for (int i = 1; i < sizes.length; i++) {
             layers.add(new Layer(sizes[i], layers.get(i - 1)));
+            setAppleSFactorsHigh();
+        }
+    }
+
+    private void setAppleSFactorsHigh() {
+        for (int n : new int[]{1, 4, 7, 10, 13, 16, 19, 22}) {
+            layers.get(0).neurons.get(n).setFactor(10);
+            layers.get(0).neurons.get(n).setConstant(10);
         }
     }
 
@@ -48,9 +56,13 @@ public class NeuronNetwork implements ListsHolder {
     }
 
     private void enterDataToFirstLayer() {
+        input = 0;
         lookLeftBackAndRightFront();
+        input = 6;
         lookLeftFrontAndRightBack();
+        input = 12;
         lookLeftAndRight();
+        input = 18;
         lookFrontAndBack();
         input = 0;
     }
@@ -126,8 +138,8 @@ public class NeuronNetwork implements ListsHolder {
 
     private void putDataIntoNetwork(int xdir, int ydir) {
         layers.get(0).neurons.get(input++).proccess(checkHowFarToWall(xdir, ydir));
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToApple(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(xdir, ydir));
         xdir *= -1;
         ydir *= -1;
         layers.get(0).neurons.get(input++).proccess(checkHowFarToWall(xdir, ydir));
@@ -135,10 +147,6 @@ public class NeuronNetwork implements ListsHolder {
     }
 
     private int checkHowFarToApple(int xdir, int ydir) {
-//        System.out.println(snake.getHeadPosY());
-//        System.out.println(game.getApple().getCell().getY());
-//        System.out.println(snake.getHeadPosX());
-//        System.out.println(apple.getCell().getX());
         for (int i = 1; i < 10; i++) {
             if (snake.getHeadPosY() + i * ydir == sizeOfField || snake.getHeadPosY() + i * ydir == -1 ||
                     snake.getHeadPosX() + i * xdir == sizeOfField || snake.getHeadPosX() + i * xdir == -1) {
