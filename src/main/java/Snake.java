@@ -13,6 +13,7 @@ public class Snake implements ListsHolder {
     private int headPosY = 5;
     private boolean state = true;
     private Cell[][] cells;
+    private int lastMove = 0;
 
     public ArrayList<Cell> body = new ArrayList();
     private NeuronNetwork neuronNetwork;
@@ -23,6 +24,7 @@ public class Snake implements ListsHolder {
     }
 
     public boolean move() {
+        lastMove = 0;
         if (checkIfHitWall() || checkIfAteTail()) {
             state = false;
             return false;
@@ -76,6 +78,7 @@ public class Snake implements ListsHolder {
             yDir = -1;
             xDir = 0;
         }
+        lastMove = -1;
     }
 
     public void turnRight() {
@@ -92,6 +95,7 @@ public class Snake implements ListsHolder {
             yDir = 1;
             xDir = 0;
         }
+        lastMove = 1;
     }
 
     public void setBody() {

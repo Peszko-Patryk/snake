@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Graphic extends JPanel implements ListsHolder, ActionListener {
-    private int highestScore = 0;
     public int speed = 10;
     private boolean watch = false;
     private Timer timer = new Timer(20 * speed, this);
@@ -35,7 +34,7 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
     private void paintStrings(Graphics g) {
         g.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         g.drawString("Generacja: " + game.getNumGen(), 10, 20);
-        g.drawString("Najwyższy wynik: " + highestScore, 10, 60);
+        g.drawString("Najwyższy wynik: " + game.getHighestScore(), 10, 60);
         g.drawString("Punkty: " + game.getSnake().getScore(), 400, 20);
         g.drawString("Pozostało: " + game.getSnake().getMovesLeft() + " ruchów", 400, 60);
         g.drawString("Prędkość węża: " + (10 - (speed - 10)), 400, 100);

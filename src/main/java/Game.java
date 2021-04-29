@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 import java.util.Random;
+
+import static java.lang.Math.abs;
 
 public class Game implements ListsHolder {
     private Random random = new Random();
@@ -10,6 +13,8 @@ public class Game implements ListsHolder {
     private Cell cell;
     private Snake snake;
     private int numGen = 1;
+    private int highestScore = 0;
+    private ArrayList<Cell> possibilities = new ArrayList<>();
 
     public Game(NeuronNetwork neuronNetwork) {
         setCells();
@@ -29,18 +34,70 @@ public class Game implements ListsHolder {
             snake.paint(g);
             if (checkIfSnakeAteApple()) {
                 putApple();
+                highestScore = snake.getScore() > highestScore ? snake.getScore() : highestScore;
             }
             apple.paint(g, o);
         }
     }
 
     public void move() {
+        findTheRightMove();
         neuronNetwork.decide();
         if (!snake.move()) {
             numGen++;
             startNewGame();
         }
-//        propagacja()
+//        backPropagation();
+    }
+
+    private void findTheRightMove() {
+        if (!checkIfSnakeSeesApple()){
+            checkHowToStayAlive();
+        } else {
+            findShortestRoute();
+        }
+        System.out.println(possibilities);
+    }
+
+    private void findShortestRoute() {
+
+    }
+
+    private void checkHowToStayAlive() {
+        possibilities.clear();
+        int xdir = snake.getxDir();
+        int ydir = snake.getyDir();
+        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < 10 && snake.getHeadPosY() + ydir >= 0 &&
+                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()){
+            possibilities.add(cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir]);
+            return;
+        }
+        int temp = xdir;
+        xdir = ydir;
+        ydir = temp;
+        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < 10 && snake.getHeadPosY() + ydir >= 0 &&
+                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
+            possibilities.add(cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir]);
+            return;
+        }
+        xdir *= -1;
+        ydir *= -1;
+        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < 10 && snake.getHeadPosY() + ydir >= 0 &&
+                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
+            possibilities.add(cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir]);
+        }
+    }
+
+    private boolean checkIfSnakeSeesApple() {
+        if (apple.getCell().getX() == snake.getHeadPosX()){
+            return true;
+        } else if (apple.getCell().getY() == snake.getHeadPosY()){
+            return true;
+        } else if (abs(apple.getCell().getX() - snake.getHeadPosX()) == abs(apple.getCell().getY() - snake.getHeadPosY())){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void startNewGame() {
@@ -86,6 +143,10 @@ public class Game implements ListsHolder {
 
     public Snake getSnake() {
         return snake;
+    }
+
+    public int getHighestScore() {
+        return highestScore;
     }
 
     public void setSnake(Snake snake) {
