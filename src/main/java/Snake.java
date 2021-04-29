@@ -19,11 +19,13 @@ public class Snake implements ListsHolder {
 
     public Snake(Cell[][] cells) {
         this.cells = cells;
+        setBody();
     }
 
-    public void move() {
+    public boolean move() {
         if (checkIfHitWall() || checkIfAteTail()) {
             state = false;
+            return false;
         } else {
             headPosX = body.get(body.size() - 1).getX() + xDir;
             headPosY = body.get(body.size() - 1).getY() + yDir;
@@ -32,22 +34,13 @@ public class Snake implements ListsHolder {
             body.get(0).setSnakeOn(false);
             body.remove(0);
             if (movesLeft == 0) {
-                state = false;
+                return false;
             } else {
                 movesLeft--;
                 movesDone++;
             }
+            return true;
         }
-    }
-
-    public void decide() {
-        int result = neuronNetwork.decide();
-        if (result == -1) {
-            turnLeft();
-        } else if (result == 1) {
-            turnRight();
-        }
-        move();
     }
 
     private boolean checkIfAteTail() {

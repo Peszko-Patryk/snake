@@ -30,15 +30,15 @@ public class NeuronNetwork implements ListsHolder {
         }
     }
 
-    public int decide() {
+    public void decide() {
         enterDataToFirstLayer();
         for (int i = 1; i < layers.size(); i++) {
             layers.get(i).proccess();
         }
-        return changeSnakesDirection();
+        changeSnakesDirection();
     }
 
-    private int changeSnakesDirection() {
+    private void changeSnakesDirection() {
         float j = layers.get(layers.size() - 1).neurons.get(0).getOutput();
         int k = 1;
         for (int i = 0; i < layers.get(layers.size() - 1).neurons.size(); i++) {
@@ -48,11 +48,10 @@ public class NeuronNetwork implements ListsHolder {
             }
         }
         if (k == 0) {
-            return -1;
+            snake.turnLeft();
         } else if (k == 2) {
-            return 1;
+            snake.turnRight();
         }
-        return 0;
     }
 
     private void enterDataToFirstLayer() {

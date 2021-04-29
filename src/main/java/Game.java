@@ -5,44 +5,47 @@ import java.util.Random;
 public class Game implements ListsHolder {
     private Random random = new Random();
     private Cell[][] cells = new Cell[sizeOfField][sizeOfField];
+    private NeuronNetwork neuronNetwork;
     private Apple apple;
     private Cell cell;
     private Snake snake;
+    private int numGen = 1;
 
     public Game(NeuronNetwork neuronNetwork) {
         setCells();
         snake = new Snake(cells);
         if (neuronNetwork == null) {
-            neuronNetwork = new NeuronNetwork(this);
+            this.neuronNetwork = new NeuronNetwork(this);
         } else {
-            neuronNetwork.changeSlightlyFactors();
+            this.neuronNetwork = neuronNetwork;
         }
-        snake.setNeuronNetwork(neuronNetwork);
-        neuronNetwork.setSnake(snake);
         apple = new Apple();
         putApple();
-        snake.setBody();
-    }
-
-    public int play() {
-        while (snake.isState()) {
-            snake.decide();
-            if (checkIfSnakeAteApple()) {
-                putApple();
-            }
-        }
-        return 50 * snake.getScore() + snake.getMovesDone();
+        this.neuronNetwork.setSnake(snake);
     }
 
     public void paint(Graphics g, ImageObserver o) {
         if (snake.isState()) {
-            snake.decide();
             snake.paint(g);
             if (checkIfSnakeAteApple()) {
                 putApple();
             }
             apple.paint(g, o);
         }
+    }
+
+    public void move() {
+        neuronNetwork.decide();
+        if (!snake.move()) {
+            numGen++;
+            startNewGame();
+        }
+//        propagacja()
+    }
+
+    private void startNewGame() {
+        snake = new Snake(cells);
+        neuronNetwork.setSnake(snake);
     }
 
     public void putApple() {
@@ -75,6 +78,10 @@ public class Game implements ListsHolder {
 
     public Apple getApple() {
         return apple;
+    }
+
+    public int getNumGen() {
+        return numGen;
     }
 
     public Snake getSnake() {

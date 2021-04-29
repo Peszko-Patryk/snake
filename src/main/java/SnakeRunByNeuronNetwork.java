@@ -2,16 +2,6 @@ import javax.swing.*;
 
 public class SnakeRunByNeuronNetwork {
     public static void main(String[] args) {
-        Thread handlingGenerations = new Thread() {
-            public void run() {
-                try {
-                    GenerationsGenerator gg = new GenerationsGenerator();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        handlingGenerations.start();
         JFrame frame = new JFrame();
         Graphic graphic = new Graphic();
 //        FramePaint frame_paint = input_file.getFramePaint();

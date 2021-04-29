@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Graphic extends JPanel implements ListsHolder, ActionListener {
-    private int numGen = 1;
     private int highestScore = 0;
     public int speed = 10;
     private boolean watch = false;
@@ -25,31 +24,23 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
             g.drawLine(42 + i * 500 / sizeOfField, 127, 42 + i * 500 / sizeOfField, 627);
             g.drawLine(42, 127 + i * 500 / sizeOfField, 542, 127 + i * 500 / sizeOfField);
         }
-        if (bestGames.size() > 0 && watch) {
-            if (bestGames.get(0).getSnake().isState()) {
-                bestGames.get(0).paint(g, null);
-            } else {
-//                watch = false;
-                if (bestGames.get(0).getSnake().getScore() > highestScore) {
-                    highestScore = bestGames.get(0).getSnake().getScore();
-                }
-                bestGames.remove(0);
-                numGen++;
-            }
+        game.paint(g, null);
+        if (watch) {
+            game.move();
+
         }
         paintStrings(g);
     }
 
     private void paintStrings(Graphics g) {
         g.setFont(new Font(Font.SERIF, Font.BOLD, 15));
-        g.drawString("Generacja: " + numGen, 10, 20);
-        g.drawString("Pozostało: " + numGen + " węży w następnej generacji.", 10, 60);
-        g.drawString("Najwyższy wynik: " + highestScore, 10, 100);
-        g.drawString("Punkty: " + (bestGames.size() > 0 ? bestGames.get(0).getSnake().getScore() : 0), 400, 20);
-        g.drawString("Pozostało: " + (bestGames.size() > 0 ? bestGames.get(0).getSnake().getMovesLeft() : 0) + " ruchów", 400, 60);
+        g.drawString("Generacja: " + game.getNumGen(), 10, 20);
+        g.drawString("Najwyższy wynik: " + highestScore, 10, 60);
+        g.drawString("Punkty: " + game.getSnake().getScore(), 400, 20);
+        g.drawString("Pozostało: " + game.getSnake().getMovesLeft() + " ruchów", 400, 60);
         g.drawString("Prędkość węża: " + (10 - (speed - 10)), 400, 100);
 
-        if (!watch && bestGames.size() > 0) {
+        if (!watch) {
             g.setFont(new Font(Font.SERIF, Font.BOLD, 30));
             g.setColor(Color.RED);
             g.drawString("Naciśnij ENTER aby rozpocząć oglądanie", 20, 200);

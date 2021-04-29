@@ -17,8 +17,10 @@ public class KeyOperations implements ListsHolder, KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_ENTER) {
-            if (!graphic.isWatch() && bestGames.size() > 0) {
+            if (!graphic.isWatch()) {
                 graphic.setWatch(true);
+            } else {
+                graphic.setWatch(false);
             }
         } else if (keyCode == KeyEvent.VK_UP) {
             if (graphic.speed > 5) {
