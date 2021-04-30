@@ -19,7 +19,7 @@ public class NeuronNetwork implements ListsHolder {
         layers.add(new Layer(sizes[0]));
         for (int i = 1; i < sizes.length; i++) {
             layers.add(new Layer(sizes[i], layers.get(i - 1)));
-            setAppleSFactorsHigh();
+//            setAppleSFactorsHigh();
         }
     }
 

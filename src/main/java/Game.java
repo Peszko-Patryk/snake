@@ -1,3 +1,4 @@
+import javax.security.auth.login.AccountExpiredException;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Game implements ListsHolder {
     private int numGen = 1;
     private int highestScore = 0;
     private ArrayList<Cell> possibilities = new ArrayList<>();
+    private ArrayList<Cell> shouldGo = new ArrayList<>();
 
     public Game(NeuronNetwork neuronNetwork) {
         setCells();
@@ -51,16 +53,10 @@ public class Game implements ListsHolder {
     }
 
     private void findTheRightMove() {
-        if (!checkIfSnakeSeesApple()){
+        if (!checkIfSnakeHasClearRouteToApple()) {
             checkHowToStayAlive();
-        } else {
-            findShortestRoute();
         }
         System.out.println(possibilities);
-    }
-
-    private void findShortestRoute() {
-
     }
 
     private void checkHowToStayAlive() {
@@ -68,7 +64,7 @@ public class Game implements ListsHolder {
         int xdir = snake.getxDir();
         int ydir = snake.getyDir();
         if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < 10 && snake.getHeadPosY() + ydir >= 0 &&
-                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()){
+                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
             possibilities.add(cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir]);
             return;
         }
@@ -88,15 +84,78 @@ public class Game implements ListsHolder {
         }
     }
 
-    private boolean checkIfSnakeSeesApple() {
-        if (apple.getCell().getX() == snake.getHeadPosX()){
+    private boolean checkIfSnakeHasClearRouteToApple() {
+        //dodaj possibiiteis
+        if (apple.getCell().getX() == snake.getHeadPosX()) {
+            for (int i = apple.getCell().getY() > snake.getHeadPosY() ? snake.getHeadPosY() : apple.getCell().getY();
+                 i < (apple.getCell().getY() < snake.getHeadPosY() ? snake.getHeadPosY() : apple.getCell().getY()) - 1; ++i) {
+                if (cells[i][snake.getHeadPosX()].isSnakeOn()) {
+                    return false;
+                }
+            }
+            shouldGo.add(cells[snake.getHeadPosY() + (snake.getHeadPosY() > apple.getCell().getY() ? -1:1)][snake.getHeadPosX()]);
             return true;
-        } else if (apple.getCell().getY() == snake.getHeadPosY()){
+        } else if (apple.getCell().getY() == snake.getHeadPosY()) {
+            for (int i = apple.getCell().getX() > snake.getHeadPosX() ? snake.getHeadPosX() : apple.getCell().getX();
+                 i < (apple.getCell().getX() < snake.getHeadPosX() ? snake.getHeadPosX() : apple.getCell().getX()) - 1; ++i) {
+                if (cells[snake.getHeadPosY()][i].isSnakeOn()) {
+                    return false;
+                }
+            }
+            shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + (snake.getHeadPosX() > apple.getCell().getX() ? -1:1)]);
             return true;
-        } else if (abs(apple.getCell().getX() - snake.getHeadPosX()) == abs(apple.getCell().getY() - snake.getHeadPosY())){
-            return true;
+        } else if (abs(apple.getCell().getX() - snake.getHeadPosX()) == abs(apple.getCell().getY() - snake.getHeadPosY())) {
+            //jezeli z przodu to tam sprobuj idz, jezeli nie mozesz to rozejrzyj sie na boki
+            // else idz do tylu lub rozejrzyj sie na boki
+            if (snake.getyDir() > apple.getCell().getY()){
+                return checkDiagonals(1);
+            } else {
+                return checkDiagonals(-1);
+            }
         } else {
             return false;
+        }
+    }
+
+    private  boolean checkDiagonals(int dir){
+        for (int i = snake.getHeadPosY()-dir; i*dir >= dir*apple.getCell().getY(); i-=dir){
+            if (cells[i][snake.getHeadPosX()].isSnakeOn()){
+                if (snake.getHeadPosX() > apple.getCell().getX()){
+                    for (int j = snake.getHeadPosX()-1; j >= apple.getCell().getX();j--){
+                        if (cells[snake.getHeadPosY()][j].isSnakeOn()){
+                            if (dir*(snake.getHeadPosY()-i) >= snake.getHeadPosX() - j && dir*(snake.getHeadPosY()-i) > 1) {
+                                //idz do gory
+                                shouldGo.add(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
+                                return true;
+                            } else if (snake.getHeadPosX() -j > 1){
+                                //idz w lewo
+                                shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() -1]);
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                } else {
+                    for (int j = snake.getHeadPosX()+1; j <= apple.getCell().getX();j++){
+                        if (cells[snake.getHeadPosY()][j].isSnakeOn()){
+                            if (dir*(snake.getHeadPosY()-i) >= j - snake.getHeadPosX() && dir*(snake.getHeadPosY()-i) > 1) {
+                                //idz do gory
+                                shouldGo.add(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
+                                return true;
+                            } else if (j-snake.getHeadPosX() > 1){
+                                //idz w prawo
+                                shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + 1]);
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            shouldGo.add(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
+            return true;
         }
     }
 
