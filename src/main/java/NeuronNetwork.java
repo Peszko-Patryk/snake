@@ -19,14 +19,6 @@ public class NeuronNetwork implements ListsHolder {
         layers.add(new Layer(sizes[0]));
         for (int i = 1; i < sizes.length; i++) {
             layers.add(new Layer(sizes[i], layers.get(i - 1)));
-//            setAppleSFactorsHigh();
-        }
-    }
-
-    private void setAppleSFactorsHigh() {
-        for (int n : new int[]{1, 4, 7, 10, 13, 16, 19, 22}) {
-            layers.get(0).neurons.get(n).setFactor(10);
-            layers.get(0).neurons.get(n).setConstant(10);
         }
     }
 
@@ -192,14 +184,5 @@ public class NeuronNetwork implements ListsHolder {
 
     public void setSnake(Snake snake) {
         this.snake = snake;
-    }
-
-    public void changeSlightlyFactors() {
-        for (Layer layer : layers) {
-            for (Neuron neuron : layer.neurons) {
-                neuron.setConstant((float) (neuron.getConstant() * (0.9 + rand.nextFloat() / 5)));
-                neuron.setFactor((float) (neuron.getFactor() * (0.9 + rand.nextFloat() / 5)));
-            }
-        }
     }
 }

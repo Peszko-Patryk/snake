@@ -3,27 +3,24 @@ import java.util.Random;
 
 public class Neuron {
     private float factor;
-    private float constant;
     private float output;
     private Random random = new Random();
     public ArrayList<Neuron> delivers;
+    public ArrayList<Float> factors;
 
 
     public Neuron() {
-        factor = random.nextFloat()*2;
-        constant = random.nextFloat();
+        factor = random.nextFloat();
     }
 
     public void proccess(int input) {
-        int data = 0;
         if (input != -1) {
-            data = input;
+            output = factor * input;
         } else {
             for (int i = 0; i < delivers.size(); i++) {
-                data += delivers.get(i).getOutput();
+                output += delivers.get(i).getOutput() * factors.get(i);
             }
         }
-        output = factor * data;
         ReLuFunction();
     }
 
@@ -35,6 +32,10 @@ public class Neuron {
 
     public void setDelivers(Layer layer) {
         delivers = layer.neurons;
+        factors = new ArrayList<>();
+        for (int i = 0; i<layer.neurons.size(); i++){
+            factors.add(random.nextFloat());
+        }
     }
 
     public float getOutput() {
@@ -47,13 +48,5 @@ public class Neuron {
 
     public void setFactor(float factor) {
         this.factor = factor;
-    }
-
-    public float getConstant() {
-        return constant;
-    }
-
-    public void setConstant(float constant) {
-        this.constant = constant;
     }
 }
