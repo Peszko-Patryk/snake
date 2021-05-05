@@ -1,4 +1,3 @@
-import javax.security.auth.login.AccountExpiredException;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
@@ -51,13 +50,14 @@ public class Game implements ListsHolder {
             startNewGame();
         }
         if (wentWhereShouldNot()) {
+            System.out.println("zmieniam wspolczynniki bo powienien " + bestDir.get(0));
             backPropagation();
         }
     }
 
     private boolean wentWhereShouldNot() {
-        if (shouldGo.contains(cells[snake.getHeadPosY()][snake.getHeadPosX()])){
-            if (possibilities.contains(cells[snake.getHeadPosY()][snake.getHeadPosX()])){
+        if (shouldGo.contains(cells[snake.getHeadPosY()][snake.getHeadPosX()])) {
+            if (possibilities.contains(cells[snake.getHeadPosY()][snake.getHeadPosX()])) {
                 return false;
             }
         }
@@ -65,10 +65,9 @@ public class Game implements ListsHolder {
     }
 
     private void backPropagation() {
-        countDifference();
-    }
-
-    private void countDifference() {
+        neuronNetwork.clearErrors();
+        neuronNetwork.countErrors(bestDir.get(0));
+        neuronNetwork.changeFactors();
     }
 
     private void findTheRightMove() {
@@ -115,21 +114,21 @@ public class Game implements ListsHolder {
                 }
             }
 //            System.out.println("polowiczny sukces");
-            shouldGo.add(cells[snake.getHeadPosY() + (snake.getHeadPosY() > apple.getCell().getY() ? -1:1)][snake.getHeadPosX()]);
-            findWay(cells[snake.getHeadPosY() + (snake.getHeadPosY() > apple.getCell().getY() ? -1:1)][snake.getHeadPosX()]);
+            shouldGo.add(cells[snake.getHeadPosY() + (snake.getHeadPosY() > apple.getCell().getY() ? -1 : 1)][snake.getHeadPosX()]);
+            findWay(cells[snake.getHeadPosY() + (snake.getHeadPosY() > apple.getCell().getY() ? -1 : 1)][snake.getHeadPosX()]);
             return true;
         } else if (apple.getCell().getY() == snake.getHeadPosY()) {
 //            System.out.println("to samo y");
             for (int i = (apple.getCell().getX() > snake.getHeadPosX() ? snake.getHeadPosX() : apple.getCell().getX()) + 1;
-                 i < (apple.getCell().getX() < snake.getHeadPosX() ? snake.getHeadPosX() : apple.getCell().getX()) ; i++) {
+                 i < (apple.getCell().getX() < snake.getHeadPosX() ? snake.getHeadPosX() : apple.getCell().getX()); i++) {
                 if (cells[snake.getHeadPosY()][i].isSnakeOn()) {
 //                    System.out.println("zajete: " + snake.getHeadPosY() + " , " + i);
                     return false;
                 }
             }
 //            System.out.println("polowiczny sukces");
-            shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + (snake.getHeadPosX() > apple.getCell().getX() ? -1:1)]);
-            findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() + (snake.getHeadPosX() > apple.getCell().getX() ? -1:1)]);
+            shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + (snake.getHeadPosX() > apple.getCell().getX() ? -1 : 1)]);
+            findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() + (snake.getHeadPosX() > apple.getCell().getX() ? -1 : 1)]);
             return true;
         } else if (abs(apple.getCell().getX() - snake.getHeadPosX()) == abs(apple.getCell().getY() - snake.getHeadPosY())) {
             //jezeli z gory to tam sprobuj idz do gory, jezeli nie mozesz to rozejrzyj sie na boki
@@ -186,43 +185,43 @@ public class Game implements ListsHolder {
         snake.turnLeft();
     }
 
-    private  boolean checkDiagonals(int dir){
+    private boolean checkDiagonals(int dir) {
 //        System.out.println("checkDiagonals");
-        for (int i = snake.getHeadPosY()-dir; i*dir >= dir*apple.getCell().getY(); i-=dir){
-            if (cells[i][snake.getHeadPosX()].isSnakeOn()){
+        for (int i = snake.getHeadPosY() - dir; i * dir >= dir * apple.getCell().getY(); i -= dir) {
+            if (cells[i][snake.getHeadPosX()].isSnakeOn()) {
 //                System.out.println("zajete: " + snake.getHeadPosY() + " , " + i);
-                if (snake.getHeadPosX() > apple.getCell().getX()){
-                    for (int j = snake.getHeadPosX()-1; j >= apple.getCell().getX();j--){
-                        if (cells[snake.getHeadPosY()][j].isSnakeOn()){
+                if (snake.getHeadPosX() > apple.getCell().getX()) {
+                    for (int j = snake.getHeadPosX() - 1; j >= apple.getCell().getX(); j--) {
+                        if (cells[snake.getHeadPosY()][j].isSnakeOn()) {
 //                            System.out.println("zajete: " + j + " , " + i);
-                            if (dir*(snake.getHeadPosY()-i) >= snake.getHeadPosX() - j && dir*(snake.getHeadPosY()-i) > 1) {
+                            if (dir * (snake.getHeadPosY() - i) >= snake.getHeadPosX() - j && dir * (snake.getHeadPosY() - i) > 1) {
                                 //idz do gory
-                                shouldGo.add(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
-                                findWay(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
+                                shouldGo.add(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
+                                findWay(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
                                 return true;
-                            } else if (snake.getHeadPosX() -j > 1){
+                            } else if (snake.getHeadPosX() - j > 1) {
                                 //idz w lewo
-                                shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() -1]);
-                                findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() -1]);
+                                shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
+                                findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
                                 return true;
                             } else {
                                 return false;
                             }
                         }
                     }
-                    shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() -1]);
-                    findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() -1]);
+                    shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
+                    findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
                     return true;
                 } else {
-                    for (int j = snake.getHeadPosX()+1; j <= apple.getCell().getX();j++){
-                        if (cells[snake.getHeadPosY()][j].isSnakeOn()){
+                    for (int j = snake.getHeadPosX() + 1; j <= apple.getCell().getX(); j++) {
+                        if (cells[snake.getHeadPosY()][j].isSnakeOn()) {
 //                            System.out.println("zajete: " + j + " , " + i);
-                            if (dir*(snake.getHeadPosY()-i) >= j - snake.getHeadPosX() && dir*(snake.getHeadPosY()-i) > 1) {
+                            if (dir * (snake.getHeadPosY() - i) >= j - snake.getHeadPosX() && dir * (snake.getHeadPosY() - i) > 1) {
                                 //idz do gory
-                                shouldGo.add(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
-                                findWay(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
+                                shouldGo.add(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
+                                findWay(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
                                 return true;
-                            } else if (j-snake.getHeadPosX() > 1){
+                            } else if (j - snake.getHeadPosX() > 1) {
                                 //idz w prawo
                                 shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + 1]);
                                 findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() + 1]);
@@ -238,14 +237,14 @@ public class Game implements ListsHolder {
                 }
             }
         }
-        shouldGo.add(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
-        findWay(cells[snake.getHeadPosY()-dir][snake.getHeadPosX()]);
+        shouldGo.add(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
+        findWay(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
         return true;
     }
 
     private void startNewGame() {
-        for (int i = 0 ; i < cells.length; i++){
-            for (int j = 0; j < cells.length; j++){
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells.length; j++) {
                 cells[i][j].setSnakeOn(false);
             }
         }

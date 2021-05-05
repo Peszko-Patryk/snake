@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class NeuronNetwork implements ListsHolder {
     private ArrayList<Layer> layers = new ArrayList<>();
-    private int[] sizes = {23, 18, 18, 3};
+    private int[] sizes = {23, 18, 10, 3};
     private int input = 0;
     private Snake snake;
     private Apple apple;
@@ -30,8 +30,42 @@ public class NeuronNetwork implements ListsHolder {
         changeSnakesDirection();
     }
 
+    public void clearErrors() {
+        for (Layer layer : layers) {
+            for (Neuron neuron : layer.neurons) {
+                neuron.clearError();
+            }
+        }
+    }
+
+    public void countErrors(int expected) {
+        for (Neuron neuron : layers.get(layers.size() - 1).neurons) {
+            neuron.setError((float) Math.pow(neuron.getOutput(), 2));
+            neuron.setError(neuron.getOutput());
+            System.out.println(neuron.factors.get(0));
+        }
+        layers.get(layers.size() - 1).neurons.get(expected + 1).setError(1 - layers.get(layers.size() - 1).neurons.get(expected + 1).getOutput());
+        for (int i = layers.size() - 1; i > 0; i--) {
+            layers.get(i).passError();
+        }
+    }
+
+    public void changeFactors() {
+        for (int i = layers.size() - 1; i >= 1; i--) {
+            for (Neuron neuron : layers.get(i).neurons) {
+                for (int j = 0; j < neuron.factors.size(); j++) {
+                    neuron.factors.set(j, neuron.factors.get(j) + (learningRate * neuron.getError() * neuron.delivers.get(j).getOutput()) / neuron.factors.get(j));
+                }
+            }
+        }
+        for (Neuron neuron : layers.get(0).neurons) {
+            neuron.setFactor(neuron.getFactor() + learningRate * neuron.getError() * neuron.getInput() / neuron.getFactor());
+        }
+    }
+
     private void changeSnakesDirection() {
-        float j = layers.get(layers.size() - 1).neurons.get(0).getOutput();
+//        System.out.println(layers.get(3).neurons.get(0).factors);
+        double j = layers.get(layers.size() - 1).neurons.get(0).getOutput();
         int k = 1;
         for (int i = 0; i < layers.get(layers.size() - 1).neurons.size(); i++) {
             if (layers.get(layers.size() - 1).neurons.get(i).getOutput() >= j) {
@@ -128,12 +162,17 @@ public class NeuronNetwork implements ListsHolder {
     }
 
     private void putDataIntoNetwork(int xdir, int ydir) {
+        layers.get(0).neurons.get(input).setInput(checkHowFarToWall(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToWall(xdir, ydir));
+        layers.get(0).neurons.get(input).setInput(checkHowFarToApple(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToApple(xdir, ydir));
+        layers.get(0).neurons.get(input).setInput(checkHowFarToTail(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(xdir, ydir));
         xdir *= -1;
         ydir *= -1;
+        layers.get(0).neurons.get(input).setInput(checkHowFarToWall(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToWall(xdir, ydir));
+        layers.get(0).neurons.get(input).setInput(checkHowFarToApple(xdir, ydir));
         layers.get(0).neurons.get(input++).proccess(checkHowFarToApple(xdir, ydir));
     }
 

@@ -2,11 +2,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Neuron {
-    private float factor;
-    private float output;
+    private double factor;
+    private double output;
+    private double input;
     private Random random = new Random();
     public ArrayList<Neuron> delivers;
-    public ArrayList<Float> factors;
+    public ArrayList<Double> factors;
+    private double error = 0;
 
 
     public Neuron() {
@@ -21,7 +23,12 @@ public class Neuron {
                 output += delivers.get(i).getOutput() * factors.get(i);
             }
         }
-        ReLuFunction();
+//        ReLuFunction();
+        sigmoidFunction();
+    }
+
+    private void sigmoidFunction() {
+        output = (float) (1 / (1 + Math.exp(-output)));
     }
 
     private void ReLuFunction() {
@@ -33,20 +40,40 @@ public class Neuron {
     public void setDelivers(Layer layer) {
         delivers = layer.neurons;
         factors = new ArrayList<>();
-        for (int i = 0; i<layer.neurons.size(); i++){
-            factors.add(random.nextFloat());
+        for (int i = 0; i < layer.neurons.size(); i++) {
+            factors.add(random.nextDouble());
         }
     }
 
-    public float getOutput() {
+    public void clearError() {
+        error = 0;
+    }
+
+    public double getInput() {
+        return input;
+    }
+
+    public void setInput(float input) {
+        this.input = input;
+    }
+
+    public double getError() {
+        return error;
+    }
+
+    public void setError(double error) {
+        this.error += error;
+    }
+
+    public double getOutput() {
         return output;
     }
 
-    public float getFactor() {
+    public double getFactor() {
         return factor;
     }
 
-    public void setFactor(float factor) {
+    public void setFactor(double factor) {
         this.factor = factor;
     }
 }

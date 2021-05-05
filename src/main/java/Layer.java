@@ -20,6 +20,14 @@ public class Layer {
         }
     }
 
+    public void passError() {
+        for (Neuron neuron : neurons) {
+            for (int i = 0; i < neuron.delivers.size(); i++) {
+                neuron.delivers.get(i).setError(neuron.getError() * neuron.factors.get(i));
+            }
+        }
+    }
+
     public void proccess() {
         for (int i = 0; i < neurons.size(); i++) {
             neurons.get(i).proccess(-1);

@@ -26,7 +26,7 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
         game.paint(g, null);
         if (watch) {
             game.move();
-
+//            watch = false;
         }
         paintStrings(g);
     }
