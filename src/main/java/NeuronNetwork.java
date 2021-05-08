@@ -3,11 +3,12 @@ import java.util.Random;
 
 public class NeuronNetwork implements ListsHolder {
     private ArrayList<Layer> layers = new ArrayList<>();
-    private int[] sizes = {23, 18, 10, 3};
+    private int[] sizes = {13, 8, 3};
     private int input = 0;
     private Snake snake;
     private Apple apple;
     private Game game;
+    public int lastMove;
     private Random rand = new Random();
 
     public NeuronNetwork(Game game) {
@@ -40,9 +41,9 @@ public class NeuronNetwork implements ListsHolder {
 
     public void countErrors(int expected) {
         for (Neuron neuron : layers.get(layers.size() - 1).neurons) {
-            neuron.setError((float) Math.pow(neuron.getOutput(), 2));
-            neuron.setError(neuron.getOutput());
-            System.out.println(neuron.factors.get(0));
+//            neuron.setError((float) Math.pow(neuron.getOutput() -0.5, 2));
+            neuron.setError(0.5 - neuron.getOutput());
+//            System.out.println(neuron.factors.get(0));
         }
         layers.get(layers.size() - 1).neurons.get(expected + 1).setError(1 - layers.get(layers.size() - 1).neurons.get(expected + 1).getOutput());
         for (int i = layers.size() - 1; i > 0; i--) {
@@ -61,10 +62,12 @@ public class NeuronNetwork implements ListsHolder {
         for (Neuron neuron : layers.get(0).neurons) {
             neuron.setFactor(neuron.getFactor() + learningRate * neuron.getError() * neuron.getInput() / neuron.getFactor());
         }
+//        System.out.println(layers.get(0).neurons.get(0).getFactor());
     }
 
     private void changeSnakesDirection() {
 //        System.out.println(layers.get(3).neurons.get(0).factors);
+        lastMove = 0;
         double j = layers.get(layers.size() - 1).neurons.get(0).getOutput();
         int k = 1;
         for (int i = 0; i < layers.get(layers.size() - 1).neurons.size(); i++) {
@@ -74,8 +77,10 @@ public class NeuronNetwork implements ListsHolder {
             }
         }
         if (k == 0) {
+            lastMove = -1;
             snake.turnLeft();
         } else if (k == 2) {
+            lastMove = 1;
             snake.turnRight();
         }
     }
@@ -83,16 +88,12 @@ public class NeuronNetwork implements ListsHolder {
     private void enterDataToFirstLayer() {
         input = 0;
         lookLeftBackAndRightFront();
-        input = 6;
         lookLeftFrontAndRightBack();
-        input = 12;
         lookLeftAndRight();
-        input = 18;
-        lookFrontAndBack();
-        input = 0;
+        lookFront();
     }
 
-    private void lookFrontAndBack() {
+    private void lookFront() {
         int xdir = snake.getxDir();
         int ydir = snake.getyDir();
         putDataIntoNetwork(xdir, ydir);
@@ -116,7 +117,9 @@ public class NeuronNetwork implements ListsHolder {
             ydir = -1;
         }
         putDataIntoNetwork(xdir, ydir);
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(-xdir, -ydir));
+        xdir *= -1;
+        ydir *= -1;
+        putDataIntoNetwork(xdir, ydir);
     }
 
     private void lookLeftFrontAndRightBack() {
@@ -136,8 +139,12 @@ public class NeuronNetwork implements ListsHolder {
             xdir = -1;
             ydir = 1;
         }
-        putDataIntoNetwork(xdir, ydir);
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(-xdir, -ydir));
+        layers.get(0).neurons.get(input).setInput(checkIfAppleInLine(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(0);
+        xdir *= -1;
+        ydir *= -1;
+        layers.get(0).neurons.get(input).setInput(checkIfAppleInLine(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(0);
     }
 
     private void lookLeftBackAndRightFront() {
@@ -157,58 +164,52 @@ public class NeuronNetwork implements ListsHolder {
             xdir = -1;
             ydir = -1;
         }
-        putDataIntoNetwork(xdir, ydir);
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(-xdir, -ydir));
-    }
-
-    private void putDataIntoNetwork(int xdir, int ydir) {
-        layers.get(0).neurons.get(input).setInput(checkHowFarToWall(xdir, ydir));
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToWall(xdir, ydir));
-        layers.get(0).neurons.get(input).setInput(checkHowFarToApple(xdir, ydir));
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToApple(xdir, ydir));
-        layers.get(0).neurons.get(input).setInput(checkHowFarToTail(xdir, ydir));
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToTail(xdir, ydir));
+        layers.get(0).neurons.get(input).setInput(checkIfAppleInLine(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(0);
         xdir *= -1;
         ydir *= -1;
-        layers.get(0).neurons.get(input).setInput(checkHowFarToWall(xdir, ydir));
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToWall(xdir, ydir));
-        layers.get(0).neurons.get(input).setInput(checkHowFarToApple(xdir, ydir));
-        layers.get(0).neurons.get(input++).proccess(checkHowFarToApple(xdir, ydir));
+        layers.get(0).neurons.get(input).setInput(checkIfAppleInLine(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(0);
     }
 
-    private int checkHowFarToApple(int xdir, int ydir) {
+    public int checkIfAppleInLine(int xdir, int ydir) {
         for (int i = 1; i < 10; i++) {
             if (snake.getHeadPosY() + i * ydir == sizeOfField || snake.getHeadPosY() + i * ydir == -1 ||
                     snake.getHeadPosX() + i * xdir == sizeOfField || snake.getHeadPosX() + i * xdir == -1) {
                 break;
             } else {
                 if (snake.getHeadPosY() + i * ydir == game.getApple().getCell().getY() && snake.getHeadPosX() + i * xdir == game.getApple().getCell().getX()) {
-                    return (10 - i);
+                    return 1;
                 }
             }
         }
         return 0;
     }
 
-    private int checkHowFarToTail(int xdir, int ydir) {
-        for (int i = 1; i < 10; i++) {
-            if (snake.getHeadPosY() + i * ydir == sizeOfField || snake.getHeadPosY() + i * ydir == -1 || snake.getHeadPosX() + i * xdir == sizeOfField || snake.getHeadPosX() + i * xdir == -1) {
-                break;
-            } else {
-                if (snake.getCells()[snake.getHeadPosY() + i * ydir][snake.getHeadPosX() + i * xdir].isSnakeOn()) {
-                    return (10 - i);
-                }
+    private void putDataIntoNetwork(int xdir, int ydir) {
+        layers.get(0).neurons.get(input).setInput(checkIfAppleInLine(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(0);
+        layers.get(0).neurons.get(input).setInput(checkIfWallIsThere(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(0);
+        layers.get(0).neurons.get(input).setInput(checkIfTaileIsThere(xdir, ydir));
+        layers.get(0).neurons.get(input++).proccess(0);
+    }
+
+    private int checkIfTaileIsThere(int xdir, int ydir) {
+        if (snake.getHeadPosY() + ydir == sizeOfField || snake.getHeadPosY() + ydir == -1 || snake.getHeadPosX() + xdir == sizeOfField || snake.getHeadPosX() + xdir == -1) {
+            return 0;
+        } else {
+            if (snake.getCells()[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
+                return 1;
             }
         }
         return 0;
     }
 
-    private int checkHowFarToWall(int xdir, int ydir) {
-        for (int i = 1; i < 10; i++) {
-            if (snake.getHeadPosX() + i * xdir == 0 || snake.getHeadPosX() + i * xdir == 9 ||
-                    snake.getHeadPosY() + i * ydir == 0 || snake.getHeadPosY() + i * ydir == 9) {
-                return (10 - i);
-            }
+    private int checkIfWallIsThere(int xdir, int ydir) {
+        if (snake.getHeadPosX() + xdir == -1 || snake.getHeadPosX() + xdir == sizeOfField ||
+                snake.getHeadPosY() + ydir == -1 || snake.getHeadPosY() + ydir == sizeOfField) {
+            return 1;
         }
         return 0;
     }

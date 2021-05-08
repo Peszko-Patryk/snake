@@ -13,6 +13,7 @@ public class Game implements ListsHolder {
     private Cell cell;
     private Snake snake;
     private int numGen = 1;
+    private int sumOfScores = 0;
     private int highestScore = 0;
     private ArrayList<Cell> possibilities = new ArrayList<>();
     private ArrayList<Cell> shouldGo = new ArrayList<>();
@@ -49,9 +50,11 @@ public class Game implements ListsHolder {
             numGen++;
             startNewGame();
         }
-        if (wentWhereShouldNot()) {
-            System.out.println("zmieniam wspolczynniki bo powienien " + bestDir.get(0));
-            backPropagation();
+        if (bestDir.size() != 0) {
+            if (neuronNetwork.lastMove != bestDir.get(0)) {
+//                System.out.println("zmieniam wspolczynniki bo powienien " + bestDir.get(0));
+                backPropagation();
+            }
         }
     }
 
@@ -81,8 +84,8 @@ public class Game implements ListsHolder {
     private void checkHowToStayAlive() {
         int xdir = snake.getxDir();
         int ydir = snake.getyDir();
-        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < 10 && snake.getHeadPosY() + ydir >= 0 &&
-                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
+        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < sizeOfField && snake.getHeadPosY() + ydir >= 0 &&
+                snake.getHeadPosY() + ydir < sizeOfField && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
             possibilities.add(cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir]);
             bestDir.add(0);
         }
@@ -106,46 +109,107 @@ public class Game implements ListsHolder {
     private boolean checkIfSnakeHasClearRouteToApple() {
         if (apple.getCell().getX() == snake.getHeadPosX()) {
 //            System.out.println("to samo x");
-            for (int i = (apple.getCell().getY() > snake.getHeadPosY() ? snake.getHeadPosY() : apple.getCell().getY()) + 1;
-                 i < (apple.getCell().getY() < snake.getHeadPosY() ? snake.getHeadPosY() : apple.getCell().getY()); i++) {
-                if (cells[i][snake.getHeadPosX()].isSnakeOn()) {
-//                    System.out.println("zajete: " + snake.getHeadPosY() + " , " + i);
-                    return false;
-                }
+            if (snake.getxDir() == 0 && ((snake.getyDir() > apple.getCell().getY() && snake.getyDir() == 1) || (snake.getyDir() < apple.getCell().getY() && snake.getyDir() == -1))) {
+                return true;
             }
-//            System.out.println("polowiczny sukces");
             shouldGo.add(cells[snake.getHeadPosY() + (snake.getHeadPosY() > apple.getCell().getY() ? -1 : 1)][snake.getHeadPosX()]);
             findWay(cells[snake.getHeadPosY() + (snake.getHeadPosY() > apple.getCell().getY() ? -1 : 1)][snake.getHeadPosX()]);
             return true;
         } else if (apple.getCell().getY() == snake.getHeadPosY()) {
 //            System.out.println("to samo y");
-            for (int i = (apple.getCell().getX() > snake.getHeadPosX() ? snake.getHeadPosX() : apple.getCell().getX()) + 1;
-                 i < (apple.getCell().getX() < snake.getHeadPosX() ? snake.getHeadPosX() : apple.getCell().getX()); i++) {
-                if (cells[snake.getHeadPosY()][i].isSnakeOn()) {
-//                    System.out.println("zajete: " + snake.getHeadPosY() + " , " + i);
-                    return false;
-                }
+            if (snake.getyDir() == 0 && ((snake.getxDir() > apple.getCell().getX() && snake.getxDir() == 1) || (snake.getxDir() < apple.getCell().getX() && snake.getxDir() == -1))) {
+                return true;
             }
-//            System.out.println("polowiczny sukces");
             shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + (snake.getHeadPosX() > apple.getCell().getX() ? -1 : 1)]);
             findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() + (snake.getHeadPosX() > apple.getCell().getX() ? -1 : 1)]);
             return true;
         } else if (abs(apple.getCell().getX() - snake.getHeadPosX()) == abs(apple.getCell().getY() - snake.getHeadPosY())) {
             //jezeli z gory to tam sprobuj idz do gory, jezeli nie mozesz to rozejrzyj sie na boki
             // else idz do dolu lub rozejrzyj sie na boki
-            if (snake.getHeadPosY() > apple.getCell().getY()) {
-                return checkDiagonals(1);
-            } else {
-                return checkDiagonals(-1);
+            if (checkLeftBackAndRightFrontDiagonals()) {
+                return true;
             }
+            return checkRightBackAndLeftFrontDiagonals();
+        }
+        return false;
+    }
+
+    private boolean checkRightBackAndLeftFrontDiagonals() {
+        int xdir = 0, ydir = 0;
+        if (snake.getxDir() == 0) {
+            if (snake.getyDir() == -1) {
+                xdir = 1;
+                ydir = 1;
+            } else {
+                xdir = -1;
+                ydir = -1;
+            }
+        } else if (snake.getxDir() == -1) {
+            xdir = 1;
+            ydir = -1;
+        } else if (snake.getxDir() == 1) {
+            xdir = -1;
+            ydir = 1;
+        }
+        if (neuronNetwork.checkIfAppleInLine(xdir, ydir) == 1) {
+            if (bestDir.contains(1)) {
+                bestDir.clear();
+                bestDir.add(1);
+            }
+            return true;
+        }
+        xdir *= -1;
+        ydir *= -1;
+        if (neuronNetwork.checkIfAppleInLine(xdir, ydir) == 1) {
+            if (bestDir.contains(0)) {
+                bestDir.clear();
+                bestDir.add(0);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkLeftBackAndRightFrontDiagonals() {
+        int xdir = 0, ydir = 0;
+        if (snake.getxDir() == 0) {
+            if (snake.getyDir() == -1) {
+                xdir = -1;
+                ydir = 1;
+            } else {
+                xdir = 1;
+                ydir = -1;
+            }
+        } else if (snake.getxDir() == -1) {
+            xdir = 1;
+            ydir = 1;
+        } else if (snake.getxDir() == 1) {
+            xdir = -1;
+            ydir = -1;
+        }
+        if (neuronNetwork.checkIfAppleInLine(xdir, ydir) == 1) {
+            if (bestDir.contains(-1)) {
+                bestDir.clear();
+                bestDir.add(-1);
+            }
+            return true;
+        }
+        xdir *= -1;
+        ydir *= -1;
+        if (neuronNetwork.checkIfAppleInLine(xdir, ydir) == 1) {
+            if (bestDir.contains(0)) {
+                bestDir.clear();
+                bestDir.add(0);
+            }
+            return true;
         }
         return false;
     }
 
     private void findWay(Cell cell) {
 //        System.out.println("glowa : " + snake.getHeadPosY() + " , " + snake.getHeadPosX() + " cel : " + cell.getY() + " , " + cell.getX());
-        if (snake.getHeadPosY() + snake.getyDir() >= 0 && snake.getHeadPosY() + snake.getyDir() < 10 &&
-                snake.getHeadPosX() + snake.getxDir() >= 0 && snake.getHeadPosX() + snake.getxDir() <= 9) {
+        if (snake.getHeadPosY() + snake.getyDir() >= 0 && snake.getHeadPosY() + snake.getyDir() < sizeOfField &&
+                snake.getHeadPosX() + snake.getxDir() >= 0 && snake.getHeadPosX() + snake.getxDir() < sizeOfField) {
 //            System.out.println(cells[snake.getHeadPosY() + snake.getyDir()][snake.getHeadPosX() + snake.getxDir()] == cell);
             if (cells[snake.getHeadPosY() + snake.getyDir()][snake.getHeadPosX() + snake.getxDir()] == cell) {
                 if (bestDir.contains(0)) {
@@ -156,8 +220,8 @@ public class Game implements ListsHolder {
             }
         }
         snake.turnLeft();
-        if (snake.getHeadPosY() + snake.getyDir() >= 0 && snake.getHeadPosY() + snake.getyDir() < 10 &&
-                snake.getHeadPosX() + snake.getxDir() >= 0 && snake.getHeadPosX() + snake.getxDir() <= 9) {
+        if (snake.getHeadPosY() + snake.getyDir() >= 0 && snake.getHeadPosY() + snake.getyDir() < sizeOfField &&
+                snake.getHeadPosX() + snake.getxDir() >= 0 && snake.getHeadPosX() + snake.getxDir() < sizeOfField) {
 //            System.out.println(cells[snake.getHeadPosY() + snake.getyDir()][snake.getHeadPosX() + snake.getxDir()] == cell);
             if (cells[snake.getHeadPosY() + snake.getyDir()][snake.getHeadPosX() + snake.getxDir()] == cell) {
                 snake.turnRight();
@@ -170,8 +234,8 @@ public class Game implements ListsHolder {
         }
         snake.turnRight();
         snake.turnRight();
-        if (snake.getHeadPosY() + snake.getyDir() >= 0 && snake.getHeadPosY() + snake.getyDir() < 10 &&
-                snake.getHeadPosX() + snake.getxDir() >= 0 && snake.getHeadPosX() + snake.getxDir() <= 9) {
+        if (snake.getHeadPosY() + snake.getyDir() >= 0 && snake.getHeadPosY() + snake.getyDir() < sizeOfField &&
+                snake.getHeadPosX() + snake.getxDir() >= 0 && snake.getHeadPosX() + snake.getxDir() < sizeOfField) {
 //            System.out.println(cells[snake.getHeadPosY() + snake.getyDir()][snake.getHeadPosX() + snake.getxDir()] == cell);
             if (cells[snake.getHeadPosY() + snake.getyDir()][snake.getHeadPosX() + snake.getxDir()] == cell) {
                 snake.turnLeft();
@@ -248,6 +312,7 @@ public class Game implements ListsHolder {
                 cells[i][j].setSnakeOn(false);
             }
         }
+        sumOfScores += snake.getScore();
         snake = new Snake(cells);
         neuronNetwork.setSnake(snake);
         putApple();
@@ -295,6 +360,10 @@ public class Game implements ListsHolder {
 
     public int getHighestScore() {
         return highestScore;
+    }
+
+    public int getSumOfScores() {
+        return sumOfScores;
     }
 
     public void setSnake(Snake snake) {

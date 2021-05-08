@@ -6,7 +6,7 @@ public class Snake implements ListsHolder {
     private int xDir = 0;
     private int yDir = -1;
     private int score = 0;
-    private int movesLeft = 150;
+    private int movesLeft = 25;
     private int movesDone = 0;
     private int getMoves = 25;
     private int headPosX = 5;

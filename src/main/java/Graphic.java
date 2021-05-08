@@ -35,6 +35,7 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
         g.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         g.drawString("Generacja: " + game.getNumGen(), 10, 20);
         g.drawString("Najwyższy wynik: " + game.getHighestScore(), 10, 60);
+        g.drawString("Średni wynik: " + game.getSumOfScores() / game.getNumGen(), 10, 100);
         g.drawString("Punkty: " + game.getSnake().getScore(), 400, 20);
         g.drawString("Pozostało: " + game.getSnake().getMovesLeft() + " ruchów", 400, 60);
         g.drawString("Prędkość węża: " + (10 - (speed - 10)), 400, 100);

@@ -17,14 +17,14 @@ public class Neuron {
 
     public void proccess(int input) {
         if (input != -1) {
-            output = factor * input;
+            output = factor * this.input;
         } else {
             for (int i = 0; i < delivers.size(); i++) {
                 output += delivers.get(i).getOutput() * factors.get(i);
             }
+//            ReLuFunction();
+            sigmoidFunction();
         }
-//        ReLuFunction();
-        sigmoidFunction();
     }
 
     private void sigmoidFunction() {
