@@ -21,6 +21,7 @@ public class Game implements ListsHolder {
     private int a=0;
     private int w=0;
     private int t=0;
+    public boolean ready = true;
 
     public Game(NeuronNetwork neuronNetwork) {
         setCells();
@@ -59,6 +60,7 @@ public class Game implements ListsHolder {
                 backPropagation();
             }
         }
+        ready = true;
     }
 
     private boolean wentWhereShouldNot() {
@@ -329,11 +331,11 @@ public class Game implements ListsHolder {
 
     private void changeConstants(){
         System.out.println("Dla a = "+ a + " , w = " + w +" , t = " + t + " najwyzszy wynik wynosi " + highestScore + " a suma " + sumOfScores);
-        if (a == 3){
+        if (a == 2){
             a = 0;
-            if (w == 3){
+            if (w == 2){
                 w = 0;
-                if (t == 3){
+                if (t == 2){
                     System.out.println("KONIEC!!!!!!!!");
                     return;
                 } else{

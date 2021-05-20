@@ -16,7 +16,7 @@ Snake
         │       ├── SnakeRunByNeuronNetwork.java
         │       ├── ReadFromFile.java
         │       ├── WriteToFile.java
-        │       ├── Cell.java
+        │       ├── Field.java
         │       ├── GenerationsGenerator.java
         │       ├── Apple.java
         │       ├── Graphics.java
