@@ -196,7 +196,7 @@ public class NeuronNetwork implements ListsHolder {
     }
 
     private int checkIfTaileIsThere(int xdir, int ydir) {
-        if (snake.getHeadPosY() + ydir == sizeOfField || snake.getHeadPosY() + ydir == -1 || snake.getHeadPosX() + xdir == sizeOfField || snake.getHeadPosX() + xdir == -1) {
+        if (snake.getHeadPosY() + ydir >= sizeOfField || snake.getHeadPosY() + ydir == -1 || snake.getHeadPosX() + xdir >= sizeOfField || snake.getHeadPosX() + xdir == -1) {
             return 0;
         } else {
             if (snake.getCells()[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
@@ -212,6 +212,18 @@ public class NeuronNetwork implements ListsHolder {
             return 1;
         }
         return 0;
+    }
+
+    public void changeConstants(int a, int t, int w){
+        for (int i = 0; i < 4 ; i++) {
+            layers.get(0).neurons.get(i).setConstant(a);
+        }
+        for (int i = 0; i < 3 ; i++) {
+            layers.get(0).neurons.get(4+i*3).setConstant(a);
+            layers.get(0).neurons.get(5+i*3).setConstant(w);
+            layers.get(0).neurons.get(6+i*3).setConstant(t);
+        }
+
     }
 
     public Apple getApple() {

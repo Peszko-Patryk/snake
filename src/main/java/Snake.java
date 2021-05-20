@@ -2,11 +2,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Snake implements ListsHolder {
-    private int length = 2;
+    private int length = 5;
     private int xDir = 0;
     private int yDir = -1;
     private int score = 0;
-    private int movesLeft = 25;
+    private int movesLeft = 50;
     private int movesDone = 0;
     private int getMoves = 25;
     private int headPosX = 5;
@@ -54,9 +54,9 @@ public class Snake implements ListsHolder {
         return false;
     }
 
-    public boolean checkIfHitWall() {
-        if (body.get(body.size() - 1).getY() + yDir < 0 || body.get(body.size() - 1).getY() + yDir > 9 ||
-                body.get(body.size() - 1).getX() + xDir < 0 || body.get(body.size() - 1).getX() + xDir > 9) {
+    private boolean checkIfHitWall() {
+        if (body.get(body.size() - 1).getY() + yDir < 0 || body.get(body.size() - 1).getY() + yDir >= sizeOfField ||
+                body.get(body.size() - 1).getX() + xDir < 0 || body.get(body.size() - 1).getX() + xDir >= sizeOfField) {
             return true;
         }
         return false;
@@ -95,10 +95,17 @@ public class Snake implements ListsHolder {
     }
 
     public void setBody() {
+        body.add(cells[7][5]);
+        cells[5][5].setSnakeOn(true);
         body.add(cells[6][5]);
         cells[6][5].setSnakeOn(true);
         body.add(cells[5][5]);
         cells[5][5].setSnakeOn(true);
+        body.add(cells[4][5]);
+        cells[5][5].setSnakeOn(true);
+        body.add(cells[3][5]);
+        cells[5][5].setSnakeOn(true);
+        length = body.size();
     }
 
     public void paint(Graphics g) {
@@ -150,6 +157,10 @@ public class Snake implements ListsHolder {
 
     public int getLength() {
         return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public int getyDir() {

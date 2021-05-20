@@ -5,11 +5,36 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SnakeTest implements ListsHolder {
-//    Snake snake;
+    Snake snake;
 
     @Test
-    void ds() {
-        assert true;
+    void shouldNotMove_whenTailOnItsWay() {
+        Game game = new Game(null);
+        snake = game.getSnake();
+        snake.body.clear();
+        snake.body.add(snake.getCells()[1][1]);
+        snake.getCells()[1][1].setSnakeOn(true);
+        snake.body.add(snake.getCells()[1][2]);
+        snake.getCells()[1][1].setSnakeOn(true);
+        snake.body.add(snake.getCells()[2][2]);
+        snake.getCells()[1][1].setSnakeOn(true);
+        snake.body.add(snake.getCells()[2][1]);
+        snake.getCells()[1][1].setSnakeOn(true);
+        snake.setLength(4);
+        boolean result = snake.move();
+        assertFalse(result);
+    }
+
+    @Test
+    void checkIfHitWall() {
+    }
+
+    @Test
+    void turnLeft() {
+    }
+
+    @Test
+    void turnRight() {
     }
 //    @BeforeEach
 //    void before() {

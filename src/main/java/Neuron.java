@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class Neuron {
     private double factor;
+    private int constant = 0;
     private double output;
     private double input;
     private Random random = new Random();
@@ -16,6 +17,7 @@ public class Neuron {
     }
 
     public void proccess(int input) {
+        output = constant;
         if (input != -1) {
             output = factor * this.input;
         } else {
@@ -47,6 +49,10 @@ public class Neuron {
 
     public void clearError() {
         error = 0;
+    }
+
+    public void setConstant(int constant) {
+        this.constant = constant;
     }
 
     public double getInput() {

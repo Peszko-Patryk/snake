@@ -18,6 +18,9 @@ public class Game implements ListsHolder {
     private ArrayList<Cell> possibilities = new ArrayList<>();
     private ArrayList<Cell> shouldGo = new ArrayList<>();
     private ArrayList<Integer> bestDir = new ArrayList<>();
+    private int a=0;
+    private int w=0;
+    private int t=0;
 
     public Game(NeuronNetwork neuronNetwork) {
         setCells();
@@ -92,15 +95,15 @@ public class Game implements ListsHolder {
         int temp = xdir;
         xdir = ydir;
         ydir = temp;
-        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < 10 && snake.getHeadPosY() + ydir >= 0 &&
-                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
+        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < sizeOfField && snake.getHeadPosY() + ydir >= 0 &&
+                snake.getHeadPosY() + ydir < sizeOfField && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
             possibilities.add(cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir]);
             bestDir.add(ydir == 0 ? -1 : 1);
         }
         xdir *= -1;
         ydir *= -1;
-        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < 10 && snake.getHeadPosY() + ydir >= 0 &&
-                snake.getHeadPosY() + ydir < 10 && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
+        if (snake.getHeadPosX() + xdir >= 0 && snake.getHeadPosX() + xdir < sizeOfField && snake.getHeadPosY() + ydir >= 0 &&
+                snake.getHeadPosY() + ydir < sizeOfField && !cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir].isSnakeOn()) {
             possibilities.add(cells[snake.getHeadPosY() + ydir][snake.getHeadPosX() + xdir]);
             bestDir.add(ydir == 0 ? 1 : -1);
         }
@@ -314,13 +317,41 @@ public class Game implements ListsHolder {
         }
         sumOfScores += snake.getScore();
         snake = new Snake(cells);
+        if (numGen == 80){
+            changeConstants();
+            numGen = 0;
+            highestScore = 0;
+            sumOfScores = 0;
+        }
         neuronNetwork.setSnake(snake);
         putApple();
     }
 
+    private void changeConstants(){
+        System.out.println("Dla a = "+ a + " , w = " + w +" , t = " + t + " najwyzszy wynik wynosi " + highestScore + " a suma " + sumOfScores);
+        if (a == 3){
+            a = 0;
+            if (w == 3){
+                w = 0;
+                if (t == 3){
+                    System.out.println("KONIEC!!!!!!!!");
+                    return;
+                } else{
+                    t++;
+                }
+            } else{
+                w++;
+            }
+        } else{
+            a++;
+        }
+        neuronNetwork = new NeuronNetwork(this);
+        neuronNetwork.changeConstants(a,t,w);
+    }
+
     public void putApple() {
         while (true) {
-            cell = cells[random.nextInt(sizeOfField)][random.nextInt(sizeOfField)];
+            cell = snake.getCells()[random.nextInt(sizeOfField)][random.nextInt(sizeOfField)];
             if (!cell.isSnakeOn()) {
                 apple.setCell(cell);
                 break;
