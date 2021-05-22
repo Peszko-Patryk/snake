@@ -2,13 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="979ee54c-a34e-4cde-aaa7-d53fd704e6fd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/NeuronTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/KeyOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KeyOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Neuron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Neuron.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/NeuronNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NeuronNetwork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Snake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/KeyOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/KeyOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GenerationsGeneratorTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/NeuronNetworkTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/NeuronNetworkTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SnakeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SnakeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Neuron.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Neuron.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/NeuronNetwork.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NeuronNetwork.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Snake.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Snake.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/NeuronNetworkTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/NeuronNetworkTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/SnakeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/SnakeTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -80,40 +89,40 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NeuronNetworkTest.decide" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameTest.shouldPutApple_whereSnakeIsNot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="snake" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="NeuronNetworkTest" />
-      <option name="METHOD_NAME" value="decide" />
+      <option name="MAIN_CLASS_NAME" value="GameTest" />
+      <option name="METHOD_NAME" value="shouldPutApple_whereSnakeIsNot" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SnakeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NeuronNetworkTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="snake" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SnakeTest" />
+      <option name="MAIN_CLASS_NAME" value="NeuronNetworkTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SnakeTest.move" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NeuronNetworkTest.shouldReturnOne_whenAppleInLine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="snake" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SnakeTest" />
-      <option name="METHOD_NAME" value="move" />
+      <option name="MAIN_CLASS_NAME" value="NeuronNetworkTest" />
+      <option name="METHOD_NAME" value="shouldReturnOne_whenAppleInLine" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SnakeTest.setScore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NeuronTest.shouldProccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="snake" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SnakeTest" />
-      <option name="METHOD_NAME" value="setScore" />
+      <option name="MAIN_CLASS_NAME" value="NeuronTest" />
+      <option name="METHOD_NAME" value="shouldProccess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -121,11 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SnakeTest.move" />
-        <item itemvalue="JUnit.SnakeTest" />
-        <item itemvalue="JUnit.NeuronNetworkTest.decide" />
         <item itemvalue="JUnit.All in snake" />
-        <item itemvalue="JUnit.SnakeTest.setScore" />
+        <item itemvalue="JUnit.GameTest.shouldPutApple_whereSnakeIsNot" />
+        <item itemvalue="JUnit.NeuronNetworkTest" />
+        <item itemvalue="JUnit.NeuronNetworkTest.shouldReturnOne_whenAppleInLine" />
+        <item itemvalue="JUnit.NeuronTest.shouldProccess" />
       </list>
     </recent_temporary>
   </component>
@@ -155,10 +164,10 @@
     </state>
     <state x="28" y="350" width="1736" height="866" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618417436404" />
     <state x="28" y="350" width="1736" height="866" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621530546916" />
-    <state x="765" y="-845" key="#com.intellij.ide.util.MemberChooser" timestamp="1621588582376">
-      <screen x="0" y="-1080" width="1920" height="1050" />
+    <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser" timestamp="1621715528814">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1620500917219" />
+    <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621715528814" />
     <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621531407099" />
     <state x="765" y="-845" key="#com.intellij.ide.util.MemberChooser/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1621588582376" />
     <state x="765" y="265" key="#com.intellij.ide.util.MemberChooser/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616944435511" />
@@ -180,38 +189,38 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="842" y="449" width="260" height="211" key="Github.ShareDialog/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616013138492" />
-    <state width="1877" height="2" key="GridCell.Tab.0.bottom" timestamp="1621696305012">
+    <state width="1877" height="178" key="GridCell.Tab.0.bottom" timestamp="1621716158620">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.bottom/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621689665661" />
-    <state width="1877" height="2" key="GridCell.Tab.0.bottom/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621696305012" />
+    <state width="1493" height="59" key="GridCell.Tab.0.bottom/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621714045857" />
+    <state width="1877" height="178" key="GridCell.Tab.0.bottom/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621716158620" />
     <state width="1877" height="374" key="GridCell.Tab.0.bottom/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621531669255" />
     <state width="1877" height="516" key="GridCell.Tab.0.bottom/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1621593547969" />
     <state width="1877" height="352" key="GridCell.Tab.0.bottom/0.30.1536.834@0.30.1536.834" timestamp="1620817309264" />
     <state width="1877" height="181" key="GridCell.Tab.0.bottom/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616946787905" />
-    <state width="1877" height="2" key="GridCell.Tab.0.center" timestamp="1621696305012">
+    <state width="1877" height="178" key="GridCell.Tab.0.center" timestamp="1621716158620">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.center/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621689665660" />
-    <state width="1877" height="2" key="GridCell.Tab.0.center/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621696305012" />
+    <state width="1493" height="59" key="GridCell.Tab.0.center/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621714045857" />
+    <state width="1877" height="178" key="GridCell.Tab.0.center/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621716158620" />
     <state width="1877" height="374" key="GridCell.Tab.0.center/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621531669254" />
     <state width="1877" height="516" key="GridCell.Tab.0.center/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1621593547968" />
     <state width="1877" height="352" key="GridCell.Tab.0.center/0.30.1536.834@0.30.1536.834" timestamp="1620817309262" />
     <state width="1877" height="181" key="GridCell.Tab.0.center/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616946787905" />
-    <state width="1877" height="2" key="GridCell.Tab.0.left" timestamp="1621696305012">
+    <state width="1877" height="178" key="GridCell.Tab.0.left" timestamp="1621716158620">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.left/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621689665660" />
-    <state width="1877" height="2" key="GridCell.Tab.0.left/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621696305012" />
+    <state width="1493" height="59" key="GridCell.Tab.0.left/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621714045857" />
+    <state width="1877" height="178" key="GridCell.Tab.0.left/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621716158620" />
     <state width="1877" height="374" key="GridCell.Tab.0.left/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621531669254" />
     <state width="1877" height="516" key="GridCell.Tab.0.left/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1621593547968" />
     <state width="1877" height="352" key="GridCell.Tab.0.left/0.30.1536.834@0.30.1536.834" timestamp="1620817309261" />
     <state width="1877" height="181" key="GridCell.Tab.0.left/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616946787905" />
-    <state width="1877" height="2" key="GridCell.Tab.0.right" timestamp="1621696305012">
+    <state width="1877" height="178" key="GridCell.Tab.0.right" timestamp="1621716158620">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1493" height="214" key="GridCell.Tab.0.right/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621689665661" />
-    <state width="1877" height="2" key="GridCell.Tab.0.right/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621696305012" />
+    <state width="1493" height="59" key="GridCell.Tab.0.right/-1920.651.1536.840/0.30.1920.1050@-1920.651.1536.840" timestamp="1621714045857" />
+    <state width="1877" height="178" key="GridCell.Tab.0.right/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621716158620" />
     <state width="1877" height="374" key="GridCell.Tab.0.right/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621531669255" />
     <state width="1877" height="516" key="GridCell.Tab.0.right/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1621593547968" />
     <state width="1877" height="352" key="GridCell.Tab.0.right/0.30.1536.834@0.30.1536.834" timestamp="1620817309263" />
@@ -265,15 +274,15 @@
     <state x="656" y="380" key="com.intellij.ide.util.TipDialog/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621644484768" />
     <state x="656" y="380" key="com.intellij.ide.util.TipDialog/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621528967446" />
     <state x="656" y="380" key="com.intellij.ide.util.TipDialog/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1616928380876" />
-    <state x="984" y="244" width="458" height="604" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1621529745512">
+    <state x="984" y="244" width="458" height="604" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1621715879175">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="984" y="244" width="458" height="604" key="com.intellij.testIntegration.createTest.CreateTestDialog/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1618426084957" />
+    <state x="984" y="244" width="458" height="604" key="com.intellij.testIntegration.createTest.CreateTestDialog/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621715879175" />
     <state x="984" y="244" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621529745512" />
-    <state x="-307" y="1062" width="1552" height="1325" key="dock-window-1" timestamp="1621689646421">
+    <state x="-307" y="1062" width="1552" height="1325" maximized="true" key="dock-window-1" timestamp="1621703020565">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="-1995" y="609" width="1934" height="1060" maximized="true" key="dock-window-1/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621644525137" />
+    <state x="-1995" y="609" width="1934" height="1060" maximized="true" key="dock-window-1/-1920.651.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621703020565" />
     <state x="-307" y="1062" width="1552" height="1325" maximized="true" key="dock-window-1/0.1104.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1621528977868" />
     <state x="-307" y="1062" width="1552" height="1325" key="dock-window-1/0.30.1536.834/0.-1080.1920.1050@0.-1080.1920.1050" timestamp="1621549249551" />
     <state x="2270" y="800" width="555" height="796" maximized="true" key="dock-window-1/1920.834.1536.840/0.30.1920.1050@0.30.1920.1050" timestamp="1617279302329" />

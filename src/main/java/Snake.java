@@ -6,7 +6,7 @@ public class Snake implements ListsHolder {
     private int xDir = 0;
     private int yDir = -1;
     private int score = 0;
-    private int movesLeft = 5000;
+    private int movesLeft = 200;
     private int movesDone = 0;
     private int getMoves = 50;
     private int headPosX = 5;
@@ -96,15 +96,13 @@ public class Snake implements ListsHolder {
 
     public void setBody() {
         body.add(cells[7][5]);
-        cells[5][5].setSnakeOn(true);
+        cells[7][5].setSnakeOn(true);
         body.add(cells[6][5]);
         cells[6][5].setSnakeOn(true);
         body.add(cells[5][5]);
         cells[5][5].setSnakeOn(true);
         body.add(cells[4][5]);
-        cells[5][5].setSnakeOn(true);
-        body.add(cells[3][5]);
-        cells[5][5].setSnakeOn(true);
+        cells[4][5].setSnakeOn(true);
         length = body.size();
     }
 
@@ -169,6 +167,14 @@ public class Snake implements ListsHolder {
 
     public int getHeadPosX() {
         return headPosX;
+    }
+
+    public void setHeadPosX(int headPosX) {
+        this.headPosX = headPosX;
+    }
+
+    public void setHeadPosY(int headPosY) {
+        this.headPosY = headPosY;
     }
 
     public int getHeadPosY() {

@@ -46,7 +46,6 @@ public class NeuronNetwork implements ListsHolder {
         for (Neuron neuron : layers.get(layers.size() - 1).neurons) {
 //            neuron.setError((float) Math.pow(neuron.getOutput() -0.5, 2));
             neuron.setError(0.5 - neuron.getOutput());
-//            System.out.println(neuron.factors.get(0));
         }
         layers.get(layers.size() - 1).neurons.get(expected + 1).setError(1 - layers.get(layers.size() - 1).neurons.get(expected + 1).getOutput());
         for (int i = layers.size() - 1; i > 0; i--) {
@@ -65,11 +64,9 @@ public class NeuronNetwork implements ListsHolder {
         for (Neuron neuron : layers.get(0).neurons) {
             neuron.setFactor(neuron.getFactor() + learningRate * neuron.getError() * neuron.getInput() / neuron.getFactor());
         }
-//        System.out.println(layers.get(0).neurons.get(0).getFactor());
     }
 
     private void changeSnakesDirection() {
-//        System.out.println(layers.get(3).neurons.get(0).factors);
         lastMove = 0;
         double j = layers.get(layers.size() - 1).neurons.get(0).getOutput();
         int k = 1;
@@ -217,14 +214,14 @@ public class NeuronNetwork implements ListsHolder {
         return 0;
     }
 
-    public void changeConstants(int a, int t, int w){
-        for (int i = 0; i < 4 ; i++) {
+    public void changeConstants(int a, int t, int w) {
+        for (int i = 0; i < 4; i++) {
             layers.get(0).neurons.get(i).setConstant(a);
         }
-        for (int i = 0; i < 3 ; i++) {
-            layers.get(0).neurons.get(4+i*3).setConstant(a);
-            layers.get(0).neurons.get(5+i*3).setConstant(w);
-            layers.get(0).neurons.get(6+i*3).setConstant(t);
+        for (int i = 0; i < 3; i++) {
+            layers.get(0).neurons.get(4 + i * 3).setConstant(a);
+            layers.get(0).neurons.get(5 + i * 3).setConstant(w);
+            layers.get(0).neurons.get(6 + i * 3).setConstant(t);
         }
 
     }

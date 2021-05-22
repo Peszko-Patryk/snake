@@ -19,18 +19,18 @@ public class Neuron {
     public void proccess(int input) {
         output = constant;
         if (input != -1) {
-            output = factor * this.input;
+            output += factor * this.input;
         } else {
             for (int i = 0; i < delivers.size(); i++) {
                 output += delivers.get(i).getOutput() * factors.get(i);
             }
-//            ReLuFunction();
-            sigmoidFunction();
         }
+//        ReLuFunction();
+        sigmoidFunction();
     }
 
     private void sigmoidFunction() {
-        output = (float) (1 / (1 + Math.exp(-output)));
+        output = 1 / (1 + Math.exp(-output));
     }
 
     private void ReLuFunction() {

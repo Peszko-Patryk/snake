@@ -19,10 +19,13 @@ public class Game implements ListsHolder {
     private ArrayList<Cell> possibilities = new ArrayList<>();
     private ArrayList<Cell> shouldGo = new ArrayList<>();
     private ArrayList<Integer> bestDir = new ArrayList<>();
-    private int a=0;
-    private int w=0;
-    private int t=0;
+    private int a = 0;
+    private int w = 0;
+    private int t = 0;
     public boolean ready = true;
+    private ArrayList<Integer> results = new ArrayList<>();
+    private ArrayList<Integer> sums = new ArrayList<>();
+    private int counter = 5;
 
     public Game(NeuronNetwork neuronNetwork) {
         setCells();
@@ -32,7 +35,7 @@ public class Game implements ListsHolder {
         } else {
             this.neuronNetwork = neuronNetwork;
         }
-        this.neuronNetwork.changeConstants(0,1,2);
+        this.neuronNetwork.changeConstants(2, 0, 1);
         apple = new Apple();
         putApple();
         this.neuronNetwork.setSnake(snake);
@@ -54,7 +57,7 @@ public class Game implements ListsHolder {
         neuronNetwork.decide();
         if (!snake.move()) {
             numGen++;
-            if (snake.getScore() > 24 && learn){
+            if (snake.getScore() > 24 && learn) {
                 numGen = 0;
                 sumOfScores = 0;
                 learn = false;
@@ -63,20 +66,10 @@ public class Game implements ListsHolder {
         }
         if (bestDir.size() != 0) {
             if (neuronNetwork.lastMove != bestDir.get(0) && learn) {
-//                System.out.println("zmieniam wspolczynniki bo powienien " + bestDir.get(0));
                 backPropagation();
             }
         }
         ready = true;
-    }
-
-    private boolean wentWhereShouldNot() {
-        if (shouldGo.contains(cells[snake.getHeadPosY()][snake.getHeadPosX()])) {
-            if (possibilities.contains(cells[snake.getHeadPosY()][snake.getHeadPosX()])) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void backPropagation() {
@@ -261,63 +254,6 @@ public class Game implements ListsHolder {
         snake.turnLeft();
     }
 
-    private boolean checkDiagonals(int dir) {
-//        System.out.println("checkDiagonals");
-        for (int i = snake.getHeadPosY() - dir; i * dir >= dir * apple.getCell().getY(); i -= dir) {
-            if (cells[i][snake.getHeadPosX()].isSnakeOn()) {
-//                System.out.println("zajete: " + snake.getHeadPosY() + " , " + i);
-                if (snake.getHeadPosX() > apple.getCell().getX()) {
-                    for (int j = snake.getHeadPosX() - 1; j >= apple.getCell().getX(); j--) {
-                        if (cells[snake.getHeadPosY()][j].isSnakeOn()) {
-//                            System.out.println("zajete: " + j + " , " + i);
-                            if (dir * (snake.getHeadPosY() - i) >= snake.getHeadPosX() - j && dir * (snake.getHeadPosY() - i) > 1) {
-                                //idz do gory
-                                shouldGo.add(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
-                                findWay(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
-                                return true;
-                            } else if (snake.getHeadPosX() - j > 1) {
-                                //idz w lewo
-                                shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
-                                findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-                    }
-                    shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
-                    findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() - 1]);
-                    return true;
-                } else {
-                    for (int j = snake.getHeadPosX() + 1; j <= apple.getCell().getX(); j++) {
-                        if (cells[snake.getHeadPosY()][j].isSnakeOn()) {
-//                            System.out.println("zajete: " + j + " , " + i);
-                            if (dir * (snake.getHeadPosY() - i) >= j - snake.getHeadPosX() && dir * (snake.getHeadPosY() - i) > 1) {
-                                //idz do gory
-                                shouldGo.add(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
-                                findWay(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
-                                return true;
-                            } else if (j - snake.getHeadPosX() > 1) {
-                                //idz w prawo
-                                shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + 1]);
-                                findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() + 1]);
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-                    }
-                    shouldGo.add(cells[snake.getHeadPosY()][snake.getHeadPosX() + 1]);
-                    findWay(cells[snake.getHeadPosY()][snake.getHeadPosX() + 1]);
-                    return true;
-                }
-            }
-        }
-        shouldGo.add(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
-        findWay(cells[snake.getHeadPosY() - dir][snake.getHeadPosX()]);
-        return true;
-    }
-
     private void startNewGame() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
@@ -326,8 +262,17 @@ public class Game implements ListsHolder {
         }
         sumOfScores += snake.getScore();
         snake = new Snake(cells);
-//        if (numGen == 800){
-//            changeConstants();
+//        if (numGen == 300){
+//            neuronNetwork = new NeuronNetwork(this);
+//            if (counter-- == 0) {
+//                changeConstants();
+//                results.clear();
+//                sums.clear();
+//                counter = 5;
+//            } else {
+//                sums.add(sumOfScores);
+//                results.add(highestScore);
+//            }
 //            numGen = 0;
 //            highestScore = 0;
 //            sumOfScores = 0;
@@ -336,26 +281,25 @@ public class Game implements ListsHolder {
         putApple();
     }
 
-    private void changeConstants(){
-        System.out.println("Dla a = "+ a + " , w = " + w +" , t = " + t + " najwyzszy wynik wynosi " + highestScore + " a suma " + sumOfScores);
-        if (a == 2){
+    private void changeConstants() {
+        System.out.println("Dla a = " + a + " , w = " + w + " , t = " + t + " wyniki " + results + " a sumy " + sums);
+        if (a == 2) {
             a = 0;
-            if (w == 2){
+            if (w == 2) {
                 w = 0;
-                if (t == 2){
+                if (t == 2) {
                     System.out.println("KONIEC!!!!!!!!");
                     return;
-                } else{
+                } else {
                     t++;
                 }
-            } else{
+            } else {
                 w++;
             }
-        } else{
+        } else {
             a++;
         }
-        neuronNetwork = new NeuronNetwork(this);
-        neuronNetwork.changeConstants(a,t,w);
+        neuronNetwork.changeConstants(a, t, w);
     }
 
     public void putApple() {
@@ -376,6 +320,10 @@ public class Game implements ListsHolder {
             }
         }
         return false;
+    }
+
+    public Cell[][] getCells() {
+        return cells;
     }
 
     private void setCells() {
@@ -404,6 +352,10 @@ public class Game implements ListsHolder {
 
     public int getSumOfScores() {
         return sumOfScores;
+    }
+
+    public NeuronNetwork getNeuronNetwork() {
+        return neuronNetwork;
     }
 
     public void setSnake(Snake snake) {
