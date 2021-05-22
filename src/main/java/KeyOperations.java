@@ -23,7 +23,7 @@ public class KeyOperations implements ListsHolder, KeyListener {
                 graphic.setWatch(false);
             }
         } else if (keyCode == KeyEvent.VK_UP) {
-            if (graphic.speed > 5) {
+            if (graphic.speed > 0) {
                 graphic.speed -= 1;
             }
         } else if (keyCode == KeyEvent.VK_DOWN) {

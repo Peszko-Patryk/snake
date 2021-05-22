@@ -58,7 +58,7 @@ public class NeuronNetwork implements ListsHolder {
         for (int i = layers.size() - 1; i >= 1; i--) {
             for (Neuron neuron : layers.get(i).neurons) {
                 for (int j = 0; j < neuron.factors.size(); j++) {
-                    neuron.factors.set(j, neuron.factors.get(j) + (learningRate * neuron.getError() * neuron.delivers.get(j).getOutput()) );
+                    neuron.factors.set(j, neuron.factors.get(j) + (learningRate * neuron.getError() * neuron.delivers.get(j).getOutput()) / neuron.factors.get(j));
                 }
             }
         }

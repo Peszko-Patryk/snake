@@ -11,6 +11,7 @@ public class Game implements ListsHolder {
     private NeuronNetwork neuronNetwork;
     private Apple apple;
     private Cell cell;
+    private boolean learn = true;
     private Snake snake;
     private int numGen = 1;
     private int sumOfScores = 0;
@@ -53,10 +54,15 @@ public class Game implements ListsHolder {
         neuronNetwork.decide();
         if (!snake.move()) {
             numGen++;
+            if (snake.getScore() > 24 && learn){
+                numGen = 0;
+                sumOfScores = 0;
+                learn = false;
+            }
             startNewGame();
         }
         if (bestDir.size() != 0) {
-            if (neuronNetwork.lastMove != bestDir.get(0)) {
+            if (neuronNetwork.lastMove != bestDir.get(0) && learn) {
 //                System.out.println("zmieniam wspolczynniki bo powienien " + bestDir.get(0));
                 backPropagation();
             }
