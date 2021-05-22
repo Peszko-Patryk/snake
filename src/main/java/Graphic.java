@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class Graphic extends JPanel implements ListsHolder, ActionListener {
     public int speed = 10;
     private boolean watch = false;
-    private Timer timer = new Timer(0 * speed, this);
+    private Timer timer = new Timer(10 * speed, this);
     Image snakeImage = Toolkit.getDefaultToolkit().getImage("src\\main\\resources\\snake.png");
 
     public Graphic() {
@@ -14,7 +14,7 @@ public class Graphic extends JPanel implements ListsHolder, ActionListener {
     }
 
     public void paint(Graphics g) {
-        timer.setDelay(0 * speed);
+        timer.setDelay(10 * speed);
         g.fillRect(1, 1, 582, 659);
         g.drawImage(snakeImage, 0, 0, 584, 661, this);
         g.setColor(Color.WHITE);

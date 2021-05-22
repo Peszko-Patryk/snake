@@ -31,6 +31,7 @@ public class Game implements ListsHolder {
         } else {
             this.neuronNetwork = neuronNetwork;
         }
+        this.neuronNetwork.changeConstants(0,1,2);
         apple = new Apple();
         putApple();
         this.neuronNetwork.setSnake(snake);
@@ -319,12 +320,12 @@ public class Game implements ListsHolder {
         }
         sumOfScores += snake.getScore();
         snake = new Snake(cells);
-        if (numGen == 80){
-            changeConstants();
-            numGen = 0;
-            highestScore = 0;
-            sumOfScores = 0;
-        }
+//        if (numGen == 800){
+//            changeConstants();
+//            numGen = 0;
+//            highestScore = 0;
+//            sumOfScores = 0;
+//        }
         neuronNetwork.setSnake(snake);
         putApple();
     }

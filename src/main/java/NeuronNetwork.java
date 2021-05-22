@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class NeuronNetwork implements ListsHolder {
     private ArrayList<Layer> layers = new ArrayList<>();
-    private int[] sizes = {13, 8, 3};
+    private ArrayList<Integer> sizes = new ArrayList<>();
     private int input = 0;
     private Snake snake;
     private Apple apple;
@@ -13,13 +13,16 @@ public class NeuronNetwork implements ListsHolder {
 
     public NeuronNetwork(Game game) {
         this.game = game;
+        sizes.add(13);
+        sizes.add(3);
+        sizes.add(3);
         createLayers();
     }
 
     private void createLayers() {
-        layers.add(new Layer(sizes[0]));
-        for (int i = 1; i < sizes.length; i++) {
-            layers.add(new Layer(sizes[i], layers.get(i - 1)));
+        layers.add(new Layer(sizes.get(0)));
+        for (int i = 1; i < sizes.size(); i++) {
+            layers.add(new Layer(sizes.get(i), layers.get(i - 1)));
         }
     }
 
@@ -55,7 +58,7 @@ public class NeuronNetwork implements ListsHolder {
         for (int i = layers.size() - 1; i >= 1; i--) {
             for (Neuron neuron : layers.get(i).neurons) {
                 for (int j = 0; j < neuron.factors.size(); j++) {
-                    neuron.factors.set(j, neuron.factors.get(j) + (learningRate * neuron.getError() * neuron.delivers.get(j).getOutput()) / neuron.factors.get(j));
+                    neuron.factors.set(j, neuron.factors.get(j) + (learningRate * neuron.getError() * neuron.delivers.get(j).getOutput()) );
                 }
             }
         }
@@ -232,6 +235,14 @@ public class NeuronNetwork implements ListsHolder {
 
     public Snake getSnake() {
         return snake;
+    }
+
+    public ArrayList<Integer> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(ArrayList<Integer> sizes) {
+        this.sizes = sizes;
     }
 
     public void setSnake(Snake snake) {
