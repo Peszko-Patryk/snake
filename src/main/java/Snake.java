@@ -15,7 +15,6 @@ public class Snake implements ListsHolder {
     private Cell[][] cells;
 
     public ArrayList<Cell> body = new ArrayList();
-    private NeuronNetwork neuronNetwork;
 
     public Snake(Cell[][] cells) {
         this.cells = cells;
@@ -117,15 +116,6 @@ public class Snake implements ListsHolder {
         return cells;
     }
 
-    public NeuronNetwork getNeuronNetwork() {
-        return neuronNetwork;
-    }
-
-    public void setNeuronNetwork(NeuronNetwork neuronNetwork) {
-        this.neuronNetwork = neuronNetwork;
-        this.neuronNetwork.setSnake(this);
-    }
-
     public void setScore() {
         score++;
         movesLeft += getMoves;
@@ -135,10 +125,6 @@ public class Snake implements ListsHolder {
 
     public boolean isState() {
         return state;
-    }
-
-    public int getMovesDone() {
-        return movesDone;
     }
 
     public int getMovesLeft() {

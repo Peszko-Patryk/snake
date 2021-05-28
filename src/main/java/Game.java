@@ -19,13 +19,7 @@ public class Game implements ListsHolder {
     private ArrayList<Cell> possibilities = new ArrayList<>();
     private ArrayList<Cell> shouldGo = new ArrayList<>();
     private ArrayList<Integer> bestDir = new ArrayList<>();
-    private int a = 0;
-    private int w = 0;
-    private int t = 0;
     public boolean ready = true;
-    private ArrayList<Integer> results = new ArrayList<>();
-    private ArrayList<Integer> sums = new ArrayList<>();
-    private int counter = 5;
 
     public Game(NeuronNetwork neuronNetwork) {
         setCells();
@@ -35,7 +29,7 @@ public class Game implements ListsHolder {
         } else {
             this.neuronNetwork = neuronNetwork;
         }
-        this.neuronNetwork.changeConstants(2, 0, 1);
+        this.neuronNetwork.changeConstants(1, 0, 0);
         apple = new Apple();
         putApple();
         this.neuronNetwork.setSnake(snake);
@@ -279,27 +273,6 @@ public class Game implements ListsHolder {
 //        }
         neuronNetwork.setSnake(snake);
         putApple();
-    }
-
-    private void changeConstants() {
-        System.out.println("Dla a = " + a + " , w = " + w + " , t = " + t + " wyniki " + results + " a sumy " + sums);
-        if (a == 2) {
-            a = 0;
-            if (w == 2) {
-                w = 0;
-                if (t == 2) {
-                    System.out.println("KONIEC!!!!!!!!");
-                    return;
-                } else {
-                    t++;
-                }
-            } else {
-                w++;
-            }
-        } else {
-            a++;
-        }
-        neuronNetwork.changeConstants(a, t, w);
     }
 
     public void putApple() {
