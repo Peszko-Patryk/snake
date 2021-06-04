@@ -1,0 +1,34 @@
+	    Snake
+            ├── dokumenty
+            │   ├── spec_func
+            │   │   └── specyfikacja_funkcjonalna.pdf
+            │   ├── sprawozdanie
+            │   │   └── sprawozdanie.pdf
+            │   └── spec_impl
+            │       ├── siec.png
+            │       ├── struktura.txt
+            │       └── specyfikacja_implementacyjna.pdf
+            └── src
+                ├── main
+                │   ├── java
+                │   │   ├── Neuron.java
+                │   │   ├── Layer.java
+                │   │   ├── NeuronNetwork.java
+                │   │   ├── ListsHolder.java 
+                │   │   ├── SnakeRunByNeuronNetwork.java
+                │   │   ├── Apple.java
+                │   │   ├── Graphic.java
+                │   │   ├── KeyOperations.java
+                │   │   ├── Snake.java
+                │   │   ├── Cell.java
+                │   │   └── Game.java
+                │   └── resources  
+                │       ├── apple.png
+                │       ├── input.txt
+                │       └── output.txt
+        	└── test
+        	    └── java
+                        ├── NeuronTest.java
+                        ├── NeuronNetworkTest.java
+                        ├── SnakeTest.java
+                        └── GameTest.java
